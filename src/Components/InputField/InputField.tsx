@@ -8,7 +8,7 @@ const InputField: React.FC = () => {
                 placeholder="paste your link" 
                 className="input-field"
             />
-            <button>Shorten Link</button>
+            <button>Try It!</button>
         </div>
     )
 }

@@ -1,5 +1,5 @@
 import './ShortenedLinkPage.css'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 
 const ShortenedLinkPage: React.FC = () => {
     const [shortLink, setShortLink] = useState('')
@@ -23,7 +23,7 @@ const ShortenedLinkPage: React.FC = () => {
                 >Copy</button> 
             </div>
             <div className='original-link-container'>
-                <h3 className='original-link-header'>Original URL:</h3>
+                <label className='original-link-label'>Original URL:</label>
                 <p className='original-link-body'>
                     {originalLink}
                 </p>
