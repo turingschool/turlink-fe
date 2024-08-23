@@ -7,15 +7,13 @@ const LandingPage: React.FC = () => {
             <div className="landing-content">
                 <div className="text-section">
                     <h1>Welcome to TurLink</h1>
-                    <h2>A link shortener for the Turing Community</h2>
+                    <h3>A link shortener for the Turing Community</h3>
                 </div>
                 <div className="image-section">
                     <img src="/LandingPageImage.jpg" alt="Code on computer screen"></img>
                 </div>
             </div>
-            <div className="form-section">
-                <input type="text" placeholder="paste your link here" className="input-field"></input>
-                <button className="submit-button">Try It!</button>
+            <div className="blank section">
             </div>
         </section>
     )
