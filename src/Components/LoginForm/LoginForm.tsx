@@ -1,56 +1,58 @@
-import { useState } from 'react'
+import { useState, MouseEvent, ChangeEvent } from 'react'
 
-function LoginForm() {
-const[email, setEmail] = useState('')
-const[password, setPassword] = useState('')
+const LoginForm = (): React.JSX.Element => {
+    const [email, setEmail] = useState<string>('')
+    const [password, setPassword] = useState<string>('')
 
-// when the user clicks the login button, execute a post request
-// if the response.ok, route the user to their dashboard
-// if the !response.ok, show the user a message
-// clear the inputs
-// as soon as the user starts typing again, clear the error message 
-
-
-// isError state default to false
-// then if I get a !response.ok, set error to true
-// return conditional if error = true, then display the error 
-
-// onChange when setting email, set the error to false again 
-// or could have a useEffect, if a user is typing in the password or email
-// clear the message 
+    // when the user clicks the login button, execute a post request
+    // if the response.ok, route the user to their dashboard
+    // if the !response.ok, show the user a message
+    // clear the inputs
+    // as soon as the user starts typing again, clear the error message 
 
 
-// create a secure json object??
-// check to see what the backend is expecting
+    // isError state default to false
+    // then if I get a !response.ok, set error to true
+    // return conditional if error = true, then display the error 
 
-//  verifying input
+    // onChange when setting email, set the error to false again 
+    // or could have a useEffect, if a user is typing in the password or email
+    // clear the message 
 
-// write a function to confirm email form
-// confirm @ sign 
-// confirm .com 
-// could have message that appears as using is typing 
 
-// inline error 
+    // create a secure json object??
+    // check to see what the backend is expecting
 
-console.log("hello")
+    //  verifying input
 
-return (
-    <form>
-        <input
-            type="text"
-            placeholder="email"
-            value={email}
-            onChange={(event) => setEmail(event.target.value)}
-        />
-        <input
-            type="password"
-            placeholder="password"
-            value={password}
-            onChange={(event) => setPassword(event.target.value)}
-        />
-        {/* <button onSubmit={() => }>Login</button> */}
-    </form>
-)
+    // write a function to confirm email form
+    // confirm @ sign 
+    // confirm .com 
+    // could have message that appears as using is typing 
+
+    // inline error 
+
+    const handleLogin = (event: MouseEvent<HTMLButtonElement>) => {
+        event.preventDefault()
+    }
+
+    return (
+        <form>
+            <input
+                type="text"
+                placeholder="email"
+                value={email}
+                onChange={(event: ChangeEvent<HTMLInputElement>) => setEmail(event.target.value)}
+            />
+            <input
+                type="password"
+                placeholder="password"
+                value={password}
+                onChange={(event: ChangeEvent<HTMLInputElement>) => setPassword(event.target.value)}
+            />
+            <button type="button" onClick={handleLogin}>Login</button>
+        </form>
+    )
 }
 
 export default LoginForm
