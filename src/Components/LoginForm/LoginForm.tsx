@@ -32,6 +32,8 @@ const[password, setPassword] = useState('')
 
 // inline error 
 
+console.log("hello")
+
 return (
     <form>
         <input
@@ -46,7 +48,7 @@ return (
             value={password}
             onChange={(event) => setPassword(event.target.value)}
         />
-        <button onSubmit={() => }>Login</button>
+        {/* <button onSubmit={() => }>Login</button> */}
     </form>
 )
 }
