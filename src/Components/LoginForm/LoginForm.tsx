@@ -3,7 +3,6 @@ import { useState, MouseEvent, ChangeEvent } from 'react'
 interface User {
     email: string;
     password: string;
-    password_confirmation: string;
 }
 
 const LoginForm = (): React.JSX.Element => {
@@ -41,22 +40,29 @@ const LoginForm = (): React.JSX.Element => {
     const handleLogin = (event: MouseEvent<HTMLButtonElement>) => {
         event.preventDefault()
         const user = {
-            email, 
+            email,
             password,
-            password_confirmation: password, 
         }
-        console.log('user:', user)
+        console.log("user:", user)
         authenticateUser(user)
     }
 
     const authenticateUser = (user: User) => {
-        fetch('http://localhost:5000/api/v1/sessions', {
+        return fetch('https://turlink-be-53ba7254a7c1.herokuapp.com/api/v1/sessions', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',  
             },
             body: JSON.stringify(user)
         })
+        .then(response => {
+            if(!response.ok) {
+                throw new Error ("Incorrect username or password.")
+            }
+            return response.json()
+        })
+        .then(response => console.log("response:", response))
+        .catch(error => console.log(error))
     }
 
     return (
@@ -79,4 +85,3 @@ const LoginForm = (): React.JSX.Element => {
 }
 
 export default LoginForm
-
