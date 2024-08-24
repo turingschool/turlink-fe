@@ -1,5 +1,11 @@
 import { useState, MouseEvent, ChangeEvent } from 'react'
 
+interface User {
+    email: string;
+    password: string;
+    password_confirmation: string;
+}
+
 const LoginForm = (): React.JSX.Element => {
     const [email, setEmail] = useState<string>('')
     const [password, setPassword] = useState<string>('')
@@ -34,6 +40,23 @@ const LoginForm = (): React.JSX.Element => {
 
     const handleLogin = (event: MouseEvent<HTMLButtonElement>) => {
         event.preventDefault()
+        const user = {
+            email, 
+            password,
+            password_confirmation: password, 
+        }
+        console.log('user:', user)
+        authenticateUser(user)
+    }
+
+    const authenticateUser = (user: User) => {
+        fetch('http://localhost:5000/api/v1/sessions', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',  
+            },
+            body: JSON.stringify(user)
+        })
     }
 
     return (
@@ -56,3 +79,4 @@ const LoginForm = (): React.JSX.Element => {
 }
 
 export default LoginForm
+
