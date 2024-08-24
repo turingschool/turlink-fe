@@ -1,3 +1,5 @@
+import '../LoginForm/LoginForm.css'
+import exclamationMark from '../../Images/exclamation-mark.png'
 import { useState, MouseEvent, ChangeEvent } from 'react'
 
 interface User {
@@ -8,6 +10,8 @@ interface User {
 const LoginForm = (): React.JSX.Element => {
     const [email, setEmail] = useState<string>('')
     const [password, setPassword] = useState<string>('')
+    const [isMissingEmail, setIsMissingEmail] = useState<boolean>(false)
+    const [isMissingPassword, setIsMissingPassword] = useState<boolean>(false)
     const [isError, setIsError] = useState<boolean>(false)
 
     // when the user clicks the login button, execute a post request
@@ -47,9 +51,17 @@ const LoginForm = (): React.JSX.Element => {
         if (email && password) {
             authenticateUser(user)
             clearInputs()
-        }
-        else {
-            setIsError(true)
+            setIsMissingEmail(false)
+            setIsMissingPassword(false)
+        } else if (!email && password) {
+            setIsMissingEmail(true)
+            setIsMissingPassword(false)
+        } else if (email && !password) {
+            setIsMissingEmail(false)
+            setIsMissingPassword(true)
+        } else {
+            setIsMissingEmail(true)
+            setIsMissingPassword(true)
         }
     }
 
@@ -64,9 +76,13 @@ const LoginForm = (): React.JSX.Element => {
             .then(response => {
                 if (!response.ok) {
                     setIsError(true)
-                    throw new Error("Incorrect username or password.")             
+                    throw new Error("Incorrect username or password.")
                 }
-                return response.json()
+                else {
+                    setIsError(false)
+                    return response.json()
+                }
+
             })
             .then(response => console.log("response:", response))
             .catch(error => console.log(error))
@@ -80,21 +96,29 @@ const LoginForm = (): React.JSX.Element => {
     return (
         <div>
             <form>
-                <input
+                <label>Email</label>
+                <br></br>
+                <input className="email-input"
                     type="text"
                     placeholder="email"
                     value={email}
                     onChange={(event: ChangeEvent<HTMLInputElement>) => setEmail(event.target.value)}
                 />
-                <input
+                <br></br>
+                {isMissingEmail && <p><img src={exclamationMark} alt="exclamation mark" className="exclamation-mark" /> please enter your email</p>}
+                <label>Password</label>
+                <br></br>
+                <input className="password-input"
                     type="password"
                     placeholder="password"
                     value={password}
                     onChange={(event: ChangeEvent<HTMLInputElement>) => setPassword(event.target.value)}
                 />
-                <button type="button" onClick={handleLogin}>Login</button>
+                <br></br>
+                {isMissingPassword && <p><img src={exclamationMark} alt="exclamation mark" className="exclamation-mark" /> please enter your password</p>}
+                <button type="button" className="login-button" onClick={handleLogin}>Login</button>
             </form>
-            {isError && <p>Incorrect Email or Password</p>}
+            {isError && <p className="login-error-message">We can't find that username and password. Try again.</p>}
         </div>
     )
 }
