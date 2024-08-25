@@ -1,4 +1,4 @@
-import '../LoginForm/LoginForm.css'
+import './LoginForm.css'
 import exclamationMark from '../../Images/exclamation-mark.png'
 import { useState, useEffect, MouseEvent, ChangeEvent } from 'react'
 
