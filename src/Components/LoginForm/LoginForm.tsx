@@ -14,18 +14,6 @@ const LoginForm = (): React.JSX.Element => {
     const [isMissingPassword, setIsMissingPassword] = useState<boolean>(false)
     const [isError, setIsError] = useState<boolean>(false)
 
-    // create a secure json object??
-    // check to see what the backend is expecting
-
-    // write a function to confirm email form
-    // confirm @ sign 
-    // confirm .com 
-    // could have message that appears as using is typing 
-
-    useEffect(() => {
-        setIsError(false)
-    }, [email, password])
-
     const handleLogin = (event: MouseEvent<HTMLButtonElement>) => {
         event.preventDefault()
         const user = {
@@ -47,6 +35,15 @@ const LoginForm = (): React.JSX.Element => {
             setIsMissingEmail(true)
             setIsMissingPassword(true)
         }
+    }
+
+    useEffect(() => {
+        setIsError(false)
+    }, [email, password])
+
+    const clearInputs = () => {
+        setEmail('')
+        setPassword('')
     }
 
     const authenticateUser = (user: User) => {
@@ -72,11 +69,6 @@ const LoginForm = (): React.JSX.Element => {
             .catch(error => console.log(error))
     }
 
-    const clearInputs = () => {
-        setEmail('')
-        setPassword('')
-    }
-
     return (
         <div>
             <form>
@@ -89,7 +81,7 @@ const LoginForm = (): React.JSX.Element => {
                     onChange={(event: ChangeEvent<HTMLInputElement>) => [setEmail(event.target.value), setIsError(false)]}
                 />
                 <br></br>
-                {isMissingEmail && <p><img src={exclamationMark} alt="exclamation mark" className="exclamation-mark" /> please enter your email</p>}
+                {isMissingEmail && <p><img src={exclamationMark} alt="exclamation mark" className="exclamation-mark"/> please enter your email</p>}
                 <label>Password</label>
                 <br></br>
                 <input className="password-input"
@@ -99,7 +91,7 @@ const LoginForm = (): React.JSX.Element => {
                     onChange={(event: ChangeEvent<HTMLInputElement>) => setPassword(event.target.value)}
                 />
                 <br></br>
-                {isMissingPassword && <p><img src={exclamationMark} alt="exclamation mark" className="exclamation-mark" /> please enter your password</p>}
+                {isMissingPassword && <p><img src={exclamationMark} alt="exclamation mark" className="exclamation-mark"/> please enter your password</p>}
                 <button type="button" className="login-button" onClick={handleLogin}>Login</button>
             </form>
             {isError && <p className="login-error-message">We can't find that username and password. Please try again.</p>}
