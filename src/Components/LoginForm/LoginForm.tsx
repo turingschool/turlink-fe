@@ -72,7 +72,7 @@ const LoginForm = (): React.JSX.Element => {
     return (
         <div>
             <form>
-                <label>Email</label>
+                <label className="email-label">Email</label>
                 <br></br>
                 <input className="email-input"
                     type="text"
@@ -81,8 +81,8 @@ const LoginForm = (): React.JSX.Element => {
                     onChange={(event: ChangeEvent<HTMLInputElement>) => [setEmail(event.target.value), setIsError(false)]}
                 />
                 <br></br>
-                {isMissingEmail && <p><img src={exclamationMark} alt="exclamation mark" className="exclamation-mark"/> please enter your email</p>}
-                <label>Password</label>
+                {isMissingEmail && <p><img src={exclamationMark} alt="exclamation mark" className="exclamation-mark" /> please enter your email</p>}
+                <label className="password-label">Password</label>
                 <br></br>
                 <input className="password-input"
                     type="password"
@@ -91,7 +91,7 @@ const LoginForm = (): React.JSX.Element => {
                     onChange={(event: ChangeEvent<HTMLInputElement>) => setPassword(event.target.value)}
                 />
                 <br></br>
-                {isMissingPassword && <p><img src={exclamationMark} alt="exclamation mark" className="exclamation-mark"/> please enter your password</p>}
+                {isMissingPassword && <p><img src={exclamationMark} alt="exclamation mark" className="exclamation-mark" /> please enter your password</p>}
                 <button type="button" className="login-button" onClick={handleLogin}>Login</button>
             </form>
             {isError && <p className="login-error-message">We can't find that username and password. Please try again.</p>}
