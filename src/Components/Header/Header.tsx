@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import './Header.css';
 
 const Header: React.FC = () => {
@@ -10,9 +11,9 @@ const Header: React.FC = () => {
                     <h1 className="site-name">TurLink</h1>
                 </div>
                 <div className="nav-links">
-                    <a href="/dashboard" className="nav-link">Dashboard</a>
-                    <a href="/about" className="nav-link">About</a>
-                    <a href="/login" className="nav-link">Login</a>
+                    <Link to="/dashboard" className="nav-link">Dashboard</Link>
+                    <Link to="/about" className="nav-link">About</Link>
+                    <Link to="/login" className="nav-link">Login</Link>
                 </div>
             </nav>
         </header>
