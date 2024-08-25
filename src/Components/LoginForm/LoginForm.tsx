@@ -1,6 +1,6 @@
 import '../LoginForm/LoginForm.css'
 import exclamationMark from '../../Images/exclamation-mark.png'
-import { useState, MouseEvent, ChangeEvent } from 'react'
+import { useState, useEffect, MouseEvent, ChangeEvent } from 'react'
 
 interface User {
     email: string;
@@ -14,33 +14,17 @@ const LoginForm = (): React.JSX.Element => {
     const [isMissingPassword, setIsMissingPassword] = useState<boolean>(false)
     const [isError, setIsError] = useState<boolean>(false)
 
-    // when the user clicks the login button, execute a post request
-    // if the response.ok, route the user to their dashboard
-    // if the !response.ok, show the user a message
-    // clear the inputs
-    // as soon as the user starts typing again, clear the error message 
-
-
-    // isError state default to false
-    // then if I get a !response.ok, set error to true
-    // return conditional if error = true, then display the error 
-
-    // onChange when setting email, set the error to false again 
-    // or could have a useEffect, if a user is typing in the password or email
-    // clear the message 
-
-
     // create a secure json object??
     // check to see what the backend is expecting
-
-    //  verifying input
 
     // write a function to confirm email form
     // confirm @ sign 
     // confirm .com 
     // could have message that appears as using is typing 
 
-    // inline error 
+    useEffect(() => {
+        setIsError(false)
+    }, [email, password])
 
     const handleLogin = (event: MouseEvent<HTMLButtonElement>) => {
         event.preventDefault()
@@ -102,7 +86,7 @@ const LoginForm = (): React.JSX.Element => {
                     type="text"
                     placeholder="email"
                     value={email}
-                    onChange={(event: ChangeEvent<HTMLInputElement>) => setEmail(event.target.value)}
+                    onChange={(event: ChangeEvent<HTMLInputElement>) => [setEmail(event.target.value), setIsError(false)]}
                 />
                 <br></br>
                 {isMissingEmail && <p><img src={exclamationMark} alt="exclamation mark" className="exclamation-mark" /> please enter your email</p>}
@@ -118,7 +102,7 @@ const LoginForm = (): React.JSX.Element => {
                 {isMissingPassword && <p><img src={exclamationMark} alt="exclamation mark" className="exclamation-mark" /> please enter your password</p>}
                 <button type="button" className="login-button" onClick={handleLogin}>Login</button>
             </form>
-            {isError && <p className="login-error-message">We can't find that username and password. Try again.</p>}
+            {isError && <p className="login-error-message">We can't find that username and password. Please try again.</p>}
         </div>
     )
 }
