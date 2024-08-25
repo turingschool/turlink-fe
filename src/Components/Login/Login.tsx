@@ -1,4 +1,4 @@
-import './LoginForm.css'
+import './Login.css'
 import exclamationMark from '../../Images/exclamation-mark.png'
 import { useState, useEffect, MouseEvent, ChangeEvent } from 'react'
 
@@ -70,32 +70,39 @@ const Login = (): React.JSX.Element => {
     }
 
     return (
-        <div>
+        <section className="login-page">
+            <div className="login-header">
+                <p className="login-header-text">Login</p>
+            </div>
             <form>
-                <label className="email-label">Email</label>
-                <br></br>
-                <input className="email-input"
-                    type="text"
-                    placeholder="email"
-                    value={email}
-                    onChange={(event: ChangeEvent<HTMLInputElement>) => [setEmail(event.target.value), setIsError(false)]}
-                />
-                <br></br>
-                {isMissingEmail && <p><img src={exclamationMark} alt="exclamation mark" className="exclamation-mark" /> please enter your email</p>}
-                <label className="password-label">Password</label>
-                <br></br>
-                <input className="password-input"
-                    type="password"
-                    placeholder="password"
-                    value={password}
-                    onChange={(event: ChangeEvent<HTMLInputElement>) => setPassword(event.target.value)}
-                />
-                <br></br>
-                {isMissingPassword && <p><img src={exclamationMark} alt="exclamation mark" className="exclamation-mark" /> please enter your password</p>}
-                <button type="button" className="login-button" onClick={handleLogin}>Login</button>
+                <div className="email-input-container">
+                    <label className="email-label">Email</label>
+                    <br></br>
+                    <input className="email-input"
+                        type="text"
+                        placeholder="email"
+                        value={email}
+                        onChange={(event: ChangeEvent<HTMLInputElement>) => [setEmail(event.target.value), setIsError(false)]}
+                    />
+                    <br></br>
+                    {isMissingEmail && <p><img src={exclamationMark} alt="exclamation mark" className="exclamation-mark"/> please enter your email</p>}
+                </div>
+                <div className="password-input-container">
+                    <label className="password-label">Password</label>
+                    <br></br>
+                    <input className="password-input"
+                        type="password"
+                        placeholder="password"
+                        value={password}
+                        onChange={(event: ChangeEvent<HTMLInputElement>) => setPassword(event.target.value)}
+                    />
+                    <br></br>
+                    {isMissingPassword && <p><img src={exclamationMark} alt="exclamation mark" className="exclamation-mark"/> please enter your password</p>}
+                    <button type="button" className="login-button" onClick={handleLogin}>Login</button>
+                </div>
             </form>
             {isError && <p className="login-error-message">We can't find that username and password. Please try again.</p>}
-        </div>
+        </section>
     )
 }
 

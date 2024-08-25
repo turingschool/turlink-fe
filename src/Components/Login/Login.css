@@ -1,8 +1,41 @@
+.login-page {
+    font-family: 'Arial', sans-serif;
+    color: #3C4040;
+}
+
+.login-header {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #82E1E6;
+    height: 6em;
+}
+
+.login-header-text {
+    margin: 0;
+    color: #3C4040;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.email-input-container,
+.password-input-container {
+    margin-top: 20px;
+}
+
+
 .exclamation-mark {
     height: 17px;
     width: 17px;
 }
 
 .login-button {
+    padding: 8px 16px;
+    border: none;
+    background-color: #82E1E6;
+    border-radius: 4px; 
     margin-top: 15px;
+    color: white;
+    font-size: 14px;    
 }
