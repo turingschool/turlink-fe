@@ -7,7 +7,7 @@ interface User {
     password: string;
 }
 
-const LoginForm = (): React.JSX.Element => {
+const Login = (): React.JSX.Element => {
     const [email, setEmail] = useState<string>('')
     const [password, setPassword] = useState<string>('')
     const [isMissingEmail, setIsMissingEmail] = useState<boolean>(false)
@@ -99,4 +99,4 @@ const LoginForm = (): React.JSX.Element => {
     )
 }
 
-export default LoginForm
+export default Login
