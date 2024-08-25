@@ -1,6 +1,8 @@
 import './Login.css'
 import exclamationMark from '../../Images/exclamation-mark.png'
 import { useState, useEffect, MouseEvent, ChangeEvent } from 'react'
+import { useNavigate } from 'react-router-dom'
+
 
 interface User {
     email: string;
@@ -13,6 +15,7 @@ const Login = (): React.JSX.Element => {
     const [isMissingEmail, setIsMissingEmail] = useState<boolean>(false)
     const [isMissingPassword, setIsMissingPassword] = useState<boolean>(false)
     const [isError, setIsError] = useState<boolean>(false)
+    const navigate = useNavigate()
 
     const handleLogin = (event: MouseEvent<HTMLButtonElement>) => {
         event.preventDefault()
@@ -59,14 +62,13 @@ const Login = (): React.JSX.Element => {
                     setIsError(true)
                     throw new Error("Incorrect username or password.")
                 }
-                else {
-                    setIsError(false)
-                    return response.json()
-                }
-
+                return response.json();
             })
-            .then(response => console.log("response:", response))
-            .catch(error => console.log(error))
+            .then(() => {
+                setIsError(false);
+                navigate('/dashboard'); 
+            })
+            .catch(error => console.log(error));
     }
 
     return (
