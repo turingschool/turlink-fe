@@ -7,8 +7,10 @@ const Header: React.FC = () => {
         <header className="header">
             <nav className="navbar">
                 <div className="left-section">
+                    <Link to="/" className="home-link">
                     <img src="/turlink_logo.png" alt="TurLink's logo" className="logo"></img>
                     <h1 className="site-name">TurLink</h1>
+                    </Link>
                 </div>
                 <div className="nav-links">
                     <Link to="/dashboard" className="nav-link">Dashboard</Link>
