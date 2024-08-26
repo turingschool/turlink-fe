@@ -4,11 +4,11 @@ import './App.css';
 import Header from '../Header/Header';
 import Dashboard from '../Dashboard/Dashboard';
 import Footer from '../Footer/Footer';
+import Login from '../Login/Login';
 import LandingPage from '../LandingPage/LandingPage';
 
 //placeholder components for routing
 const About = () => <h1>About Page</h1>;
-const Login = () => <h1>Login Page</h1>;
 
 function App() {
   return (
