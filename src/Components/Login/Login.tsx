@@ -14,6 +14,7 @@ const Login = (): React.JSX.Element => {
     const [isMissingEmail, setIsMissingEmail] = useState<boolean>(false)
     const [isMissingPassword, setIsMissingPassword] = useState<boolean>(false)
     const [isError, setIsError] = useState<boolean>(false)
+    const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false)
     const navigate = useNavigate()
 
     const handleLogin = (event: MouseEvent<HTMLButtonElement>) => {
@@ -64,8 +65,9 @@ const Login = (): React.JSX.Element => {
                 return response.json();
             })
             .then(() => {
-                setIsError(false);
-                navigate('/dashboard'); 
+                setIsError(false)
+                setIsLoggedIn(true)
+                navigate('/dashboard') 
             })
             .catch(error => console.log(error));
     }
