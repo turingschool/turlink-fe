@@ -4,9 +4,14 @@ import { useState } from 'react'
 const ShortenedLinkPage: React.FC = () => {
     const [shortLink, setShortLink] = useState('')
     const [originalLink, setOriginalLink] = useState('')
+    const [copyMessage, setCopyMessage] = useState('')
 
     const handleCopy = () => {
         navigator.clipboard.writeText(shortLink)
+        setCopyMessage(`${shortLink} copied to clipboard!`)
+        setTimeout(() => {
+            setCopyMessage('');
+        }, 3000);
     }
 
     return (
@@ -25,7 +30,10 @@ const ShortenedLinkPage: React.FC = () => {
             <div className='original-link-container'>
                 <label className='original-link-label'>Original URL:</label>
                 <p className='original-link-body'>
-                    {originalLink}
+                    TEST ORIGINAL LINK {originalLink}
+                </p>
+                <p className='copy-message-body'>
+                    {copyMessage}
                 </p>
             </div>
         </div>
