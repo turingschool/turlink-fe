@@ -28,6 +28,7 @@ body {
     justify-content: center;
     box-sizing: border-box;
     height: 50vh; 
+    font-family: 'Arial', sans-serif;
   }
   
   .text-section h1, .text-section h3 {
