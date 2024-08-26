@@ -3,7 +3,6 @@ import exclamationMark from '../../Images/exclamation-mark.png'
 import { useState, useEffect, MouseEvent, ChangeEvent } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-
 interface User {
     email: string;
     password: string;
