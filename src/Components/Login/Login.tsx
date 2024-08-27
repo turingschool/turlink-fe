@@ -1,7 +1,8 @@
-import './Login.css'
-import exclamationMark from '../../Images/exclamation-mark.png'
-import { useState, useEffect, MouseEvent, ChangeEvent } from 'react'
-import { useNavigate } from 'react-router-dom'
+import './Login.css';
+import exclamationMark from '../../Images/exclamation-mark.png';
+import { useState, MouseEvent, ChangeEvent } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { setLogin } from '../../utils/localStorage';
 
 interface User {
     email: string;
@@ -9,44 +10,40 @@ interface User {
 }
 
 const Login = (): React.JSX.Element => {
-    const [email, setEmail] = useState<string>('')
-    const [password, setPassword] = useState<string>('')
-    const [isMissingEmail, setIsMissingEmail] = useState<boolean>(false)
-    const [isMissingPassword, setIsMissingPassword] = useState<boolean>(false)
-    const [isError, setIsError] = useState<boolean>(false)
-    const navigate = useNavigate()
+    const [email, setEmail] = useState<string>('');
+    const [password, setPassword] = useState<string>('');
+    const [isMissingEmail, setIsMissingEmail] = useState<boolean>(false);
+    const [isMissingPassword, setIsMissingPassword] = useState<boolean>(false);
+    const [isError, setIsError] = useState<boolean>(false);
+    const navigate = useNavigate();
 
     const handleLogin = (event: MouseEvent<HTMLButtonElement>) => {
-        event.preventDefault()
+        event.preventDefault();
         const user = {
             email,
             password,
-        }
+        };
         if (email && password) {
-            authenticateUser(user)
-            clearInputs()
-            setIsMissingEmail(false)
-            setIsMissingPassword(false)
+            authenticateUser(user);
+            clearInputs();
+            setIsMissingEmail(false);
+            setIsMissingPassword(false);
         } else if (!email && password) {
-            setIsMissingEmail(true)
-            setIsMissingPassword(false)
+            setIsMissingEmail(true);
+            setIsMissingPassword(false);
         } else if (email && !password) {
-            setIsMissingEmail(false)
-            setIsMissingPassword(true)
+            setIsMissingEmail(false);
+            setIsMissingPassword(true);
         } else {
-            setIsMissingEmail(true)
-            setIsMissingPassword(true)
+            setIsMissingEmail(true);
+            setIsMissingPassword(true);
         }
-    }
-
-    useEffect(() => {
-        setIsError(false)
-    }, [email, password])
+    };
 
     const clearInputs = () => {
-        setEmail('')
-        setPassword('')
-    }
+        setEmail('');
+        setPassword('');
+    };
 
     const authenticateUser = (user: User) => {
         return fetch('https://turlink-be-53ba7254a7c1.herokuapp.com/api/v1/sessions', {
@@ -58,17 +55,20 @@ const Login = (): React.JSX.Element => {
         })
             .then(response => {
                 if (!response.ok) {
-                    setIsError(true)
-                    throw new Error("Incorrect username or password.")
+                    setIsError(true);
+                    throw new Error("Incorrect username or password.");
                 }
                 return response.json();
             })
-            .then(() => {
+            .then(data => {
+                console.log('Response from API:', data);
+                setLogin();  
                 setIsError(false);
                 navigate('/dashboard'); 
+                window.dispatchEvent(new Event('storage')); 
             })
             .catch(error => console.log(error));
-    }
+    };
 
     return (
         <section className="login-page">
@@ -104,7 +104,7 @@ const Login = (): React.JSX.Element => {
             </form>
             {isError && <p className="login-error-message">We can't find that username and password. Please try again.</p>}
         </section>
-    )
-}
+    );
+};
 
-export default Login
+export default Login;

@@ -98,3 +98,19 @@
       display: flex;
   }
 }
+
+.logout-button {
+  background: none;
+  border: none;
+  color: #3C4040;
+  font-size: 20px;
+  font-family: 'Arial', sans-serif;
+  font-weight: bold;
+  text-decoration: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.logout-button:hover {
+  text-decoration: underline;
+}

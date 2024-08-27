@@ -2,11 +2,11 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css';
 import Header from './Components/Header/Header';
-import Dashboard from './Components/Dashboard/Dashboard';
 import Footer from './Components/Footer/Footer';
 import LandingPage from './Components/LandingPage/LandingPage';
 
 //placeholder components for routing
+const Dashboard = () => <h1>Dashboard Page</h1>;
 const About = () => <h1>About Page</h1>;
 const Login = () => <h1>Login Page</h1>;
 
