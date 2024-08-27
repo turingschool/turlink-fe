@@ -1,41 +1,13 @@
 import './ShortenedLinkPage.css'
-import { useState } from 'react'
+import InputField from '../InputField/InputField'
+import CopyLink from '../CopyLink/CopyLink'
 
 const ShortenedLinkPage: React.FC = () => {
-    const [shortLink, setShortLink] = useState('')
-    const [originalLink, setOriginalLink] = useState('')
-    const [copyMessage, setCopyMessage] = useState('')
-
-    const handleCopy = () => {
-        navigator.clipboard.writeText(shortLink)
-        setCopyMessage(`${shortLink} copied to clipboard!`)
-        setTimeout(() => {
-            setCopyMessage('');
-        }, 3000);
-    }
 
     return (
         <div className='shortened-link-wrapper'>
-            <div className='shortened-link-container'>
-                <input 
-                    type="text" 
-                    value={shortLink}
-                    className="shortened-link-input"
-                    onChange={(e) => setShortLink(e.target.value)}
-                />
-                <button className='copy-button'
-                    onClick={handleCopy}
-                >Copy</button> 
-            </div>
-            <div className='original-link-container'>
-                <label className='original-link-label'>Original URL:</label>
-                <p className='original-link-body'>
-                    TEST ORIGINAL LINK {originalLink}
-                </p>
-                <p className='copy-message-body'>
-                    {copyMessage}
-                </p>
-            </div>
+            <InputField />
+            <CopyLink />
         </div>
     )
 }
