@@ -36,7 +36,9 @@ const Header: React.FC = () => {
                     </Link>
                 </div>
                 <div className="nav-links">
+                    {loggedIn && (
                     <Link to="/dashboard" className="nav-link">Dashboard</Link>
+                    )}
                     <Link to="/about" className="nav-link">About</Link>
                     {loggedIn ? (
                         <button className="nav-link logout-button" onClick={handleLogout}>Logout</button>
