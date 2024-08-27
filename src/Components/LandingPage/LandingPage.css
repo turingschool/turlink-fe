@@ -57,3 +57,9 @@ body {
     height: 50vh; 
     box-sizing: border-box;
   }
+
+  .app-overview {
+    color: #3C4040;
+    font-family: 'Arial', sans-serif;
+    margin-top: 6em;
+  }
