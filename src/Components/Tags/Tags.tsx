@@ -8,3 +8,12 @@ type Tag = {
   };
 };
 
+type TagsProps = {
+    linkId: string;
+  };
+  
+  const Tags: React.FC<TagsProps> = ({ linkId }) => {
+    const [allTags, setAllTags] = useState<Tag[]>([]);
+    const [linkTags, setLinkTags] = useState<Tag[]>([]);
+    const [showTags, setShowTags] = useState(false);
+  
