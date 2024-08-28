@@ -3,11 +3,12 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 type InputFieldProps = {
-    submitOriginalLink: (link: string) => void
+    submitOriginalLink: (linkInput: string) => void
 }
 
 const InputField: React.FC <InputFieldProps>= ({submitOriginalLink}) => {
-    const [linkInput, setLinkInput] = useState('')
+    
+    const [linkInput, setLinkInput] = useState<string>('')
 
 
     const handleClick = () => {

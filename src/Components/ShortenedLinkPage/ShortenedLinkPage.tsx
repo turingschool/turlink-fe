@@ -7,11 +7,11 @@ import { useNavigate } from 'react-router-dom'
 
 
 const ShortenedLinkPage: React.FC = () => {
-    const [id, setId] = useState(1)
-    const [originalLink, setOriginalLink] = useState('')
-    const [shortenedLink, setShortenedLink] = useState('')
-    const [tags, setTags] = useState([])
-    const [userId, setUserId] = useState('')
+    const [id, setId] = useState<number>(1)
+    const [originalLink, setOriginalLink] = useState<string>('')
+    const [shortenedLink, setShortenedLink] = useState<string>('')
+    const [tags, setTags] = useState<string[]>([])
+    const [userId, setUserId] = useState<string>('')
     const navigate = useNavigate();
 
     const submitOriginalLink = (linkInput: string) => {

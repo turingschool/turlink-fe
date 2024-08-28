@@ -1,13 +1,14 @@
 import './CopyLink.css'
 import { useState } from 'react'
-
+//also consider INTERFACE as option 
+//can also set Type/Interface as own FILE
 type CopyLinkProps = {
     shortenedLink: string;
     originalLink: string;
 }
 
 const CopyLink: React.FC<CopyLinkProps>= ({shortenedLink, originalLink}) => {
-    const [copyMessage, setCopyMessage] = useState('')
+    const [copyMessage, setCopyMessage] = useState<string>('')
 
     const handleCopy = () => {
         navigator.clipboard.writeText(shortenedLink)
