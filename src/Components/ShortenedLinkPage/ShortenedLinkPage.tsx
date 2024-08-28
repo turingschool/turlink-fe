@@ -28,7 +28,7 @@ const ShortenedLinkPage: React.FC = () => {
     return (
         <div className='shortened-link-wrapper'>
             <InputField submitOriginalLink={submitOriginalLink}/>
-            <CopyLink />
+            <CopyLink shortenedLink={shortenedLink} originalLink={originalLink}/>
         </div>
     )
 }

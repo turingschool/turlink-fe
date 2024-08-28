@@ -1,9 +1,13 @@
 import './CopyLink.css'
 import { useState } from 'react'
 
-const CopyLink: React.FC = () => {
+type CopyLinkProps = {
+    shortenedLink: string;
+    originalLink: string;
+}
+
+const CopyLink: React.FC<CopyLinkProps>= ({shortenedLink, originalLink}) => {
     const [shortLink, setShortLink] = useState('')
-    const [originalLink, setOriginalLink] = useState('')
     const [copyMessage, setCopyMessage] = useState('')
 
     const handleCopy = () => {
@@ -31,10 +35,10 @@ const CopyLink: React.FC = () => {
             <div className='original-link-container'>
                 <label className='original-link-label'>Original URL:</label>
                 <p className='original-link-body'>
-                    TEST ORIGINAL LINK {originalLink}
+                    {originalLink}
                 </p>
                 <p className='copy-message-body'>
-                    {copyMessage}
+                    {shortenedLink}
                 </p>
             </div>
         </div>
