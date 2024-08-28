@@ -12,13 +12,14 @@ const InputField: React.FC <InputFieldProps>= ({submitOriginalLink}) => {
 
     const handleClick = () => {
         submitOriginalLink(linkInput)
+        setLinkInput('')
     }
 
     return (
         <div className='input-body'>
             <input 
                 type="text" 
-                placeholder="paste your link" 
+                placeholder="Paste Your Link" 
                 className="input-field"
                 value={linkInput}
                 onChange={(e) => setLinkInput(e.target.value)}

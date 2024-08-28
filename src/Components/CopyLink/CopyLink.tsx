@@ -21,6 +21,7 @@ const CopyLink: React.FC = () => {
                     type="text" 
                     value={shortLink}
                     className="shortened-link-input"
+                    placeholder="Shorten Link Above"
                     onChange={(e) => setShortLink(e.target.value)}
                 />
                 <button className='copy-button'
