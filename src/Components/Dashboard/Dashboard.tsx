@@ -1,10 +1,16 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import './Dashboard.css';
+import { fetchTags } from "../apiCalls/apiCalls";
 
 interface Link {
     name: string;
     clickCount: number;
     tags: string[];
+}
+
+interface Tag {
+    id: string;
+    name: string;
 }
 
 const popularLinks: Link[] = [
@@ -17,6 +23,17 @@ const popularLinks: Link[] = [
 ];
 
 const Dashboard: React.FC = () => {
+    const [tags, setTags] = useState<Tag[]>([]);
+    const [selectedTag, setSelectedTag] = useState<string>("");
+
+    useEffect(() => {
+        fetchTags().then((fetchedTags) => setTags(fetchedTags))
+    }, []);
+
+    const handleTagChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+        setSelectedTag(event.target.value);
+    };
+
     return (
         <div className="dashboard-container">
             <section className="dashboard-header">
@@ -49,18 +66,20 @@ const Dashboard: React.FC = () => {
             {/* Filter by Tag Section will go here! */}
             <section className="filter-by-tag">
                 <h2>Filter by Tag</h2>
-                <select className="tag-filter">
+                <select className="tag-filter" value={selectedTag} onChange={handleTagChange}>
                     <option value="">Select a tag</option>
-                    {/* Can add options here! */}
+                    {tags.map((tag) => (
+                        <option key={tag.id} value={tag.name}>
+                            {tag.name}
+                        </option>
+                    ))}
                 </select>
                 <div className="current-filters">
                     <p>Current filters:</p>
-                    <span className="tag">JavaScript</span>
-                    <span className="tag">Blog</span>
+                    {selectedTag && <span className="tag">{selectedTag}</span>}
                 </div>
             </section>
         </div>
     );
-}
-
+};
 export default Dashboard;
