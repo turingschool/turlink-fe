@@ -61,7 +61,6 @@ const Login = (): React.JSX.Element => {
                 return response.json();
             })
             .then(data => {
-                console.log('Response from API:', data);
                 setLogin();  
                 setIsError(false);
                 navigate('/dashboard'); 

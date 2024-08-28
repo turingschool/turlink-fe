@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from "react";
 import './Dashboard.css';
-import { fetchTags } from "../apiCalls/apiCalls";
+import { fetchTags, fetchTopLinks } from "../apiCalls/apiCalls";
 
 interface Link {
     name: string;
@@ -26,6 +26,10 @@ const Dashboard: React.FC = () => {
     const [tags, setTags] = useState<Tag[]>([]);
     const [selectedTag, setSelectedTag] = useState<string>("");
 
+    useEffect(() => {
+        fetchTopLinks()
+    })
+    
     useEffect(() => {
         fetchTags().then((fetchedTags) => setTags(fetchedTags))
     }, []);
