@@ -14,6 +14,7 @@ const LandingPage: React.FC = () => {
                 </div>
             </div>
             <div className="blank section">
+                <h1 className="app-overview">TurLink is a link shortener and resource manager created by Turing Students for the greater Turing Community. Sign up or log in to view all resources and create your own shareable links.</h1>
             </div>
         </section>
     )

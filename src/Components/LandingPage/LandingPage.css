@@ -1,3 +1,7 @@
+body {
+  margin: 0 auto;
+}
+
 .landing-page {
     display: flex;
     flex-direction: column;
@@ -7,7 +11,6 @@
     width: 100%;
     min-height: 100vh; 
     box-sizing: border-box;
-    border: 2px solid pink;
   }
 
   .landing-content {
@@ -25,6 +28,7 @@
     justify-content: center;
     box-sizing: border-box;
     height: 50vh; 
+    font-family: 'Arial', sans-serif;
   }
 
   .text-section h1, .text-section h3 {
@@ -52,4 +56,10 @@
     background-color: #ffffff;
     height: 50vh; 
     box-sizing: border-box;
+  }
+
+  .app-overview {
+    color: #3C4040;
+    font-family: 'Arial', sans-serif;
+    margin-top: 6em;
   }
