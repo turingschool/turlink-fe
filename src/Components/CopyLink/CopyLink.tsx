@@ -7,12 +7,11 @@ type CopyLinkProps = {
 }
 
 const CopyLink: React.FC<CopyLinkProps>= ({shortenedLink, originalLink}) => {
-    const [shortLink, setShortLink] = useState('')
     const [copyMessage, setCopyMessage] = useState('')
 
     const handleCopy = () => {
-        navigator.clipboard.writeText(shortLink)
-        setCopyMessage(`${shortLink} copied to clipboard!`)
+        navigator.clipboard.writeText(shortenedLink)
+        setCopyMessage(`${shortenedLink} copied to clipboard!`)
         setTimeout(() => {
             setCopyMessage('');
         }, 3000);
@@ -23,22 +22,21 @@ const CopyLink: React.FC<CopyLinkProps>= ({shortenedLink, originalLink}) => {
             <div className='shortened-link-container'>
                 <input 
                     type="text" 
-                    value={shortLink}
+                    value={shortenedLink}
                     className="shortened-link-input"
                     placeholder="Shorten Link Above"
-                    onChange={(e) => setShortLink(e.target.value)}
                 />
                 <button className='copy-button'
                     onClick={handleCopy}
-                >Copy</button> 
+                >Copy</button>
+                <p className='copy-message-body'>
+                    {copyMessage}
+                </p> 
             </div>
             <div className='original-link-container'>
-                <label className='original-link-label'>Original URL:</label>
+                <h2 className='original-link-label'>Original URL:</h2>
                 <p className='original-link-body'>
                     {originalLink}
-                </p>
-                <p className='copy-message-body'>
-                    {shortenedLink}
                 </p>
             </div>
         </div>
