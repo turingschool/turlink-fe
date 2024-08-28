@@ -4,6 +4,7 @@ import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 import Login from '../Login/Login';
 import LandingPage from '../LandingPage/LandingPage'
+import ShortenedLinkPage from '../ShortenedLinkPage/ShortenedLinkPage';
 
 //placeholder components for routing
 const Dashboard = () => <h1>Dashboard Page</h1>;
@@ -19,6 +20,7 @@ function App() {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/about" element={<About />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/shortenlink" element={<ShortenedLinkPage />} />
       </Routes>
       <Footer />
       </div>

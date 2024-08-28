@@ -1,20 +1,17 @@
 import './InputField.css'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { getShortLink } from '../apiCalls/apiCalls'
 
-const InputField: React.FC = () => {
-    const [originalLink, setOriginalLink] = useState('')
-    const [id, setId] = useState(1)
-    const navigate = useNavigate();
+type InputFieldProps = {
+    submitOriginalLink: (link: string) => void
+}
+
+const InputField: React.FC <InputFieldProps>= ({submitOriginalLink}) => {
+    const [linkInput, setLinkInput] = useState('')
+
 
     const handleClick = () => {
-        console.log("ID: ", id)
-        console.log("ORIGINAL LINK: ", originalLink)
-        getShortLink(id, originalLink, navigate)
-        .then((data) => {
-            console.log('RESPONSE DATA', data); 
-        })
+        submitOriginalLink(linkInput)
     }
 
     return (
@@ -23,8 +20,8 @@ const InputField: React.FC = () => {
                 type="text" 
                 placeholder="paste your link" 
                 className="input-field"
-                value={originalLink}
-                onChange={(e) => setOriginalLink(e.target.value)}
+                value={linkInput}
+                onChange={(e) => setLinkInput(e.target.value)}
             />
             <button onClick={() => handleClick()}>Shorten Link</button>
         </div>
