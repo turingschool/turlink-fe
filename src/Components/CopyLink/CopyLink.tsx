@@ -1,8 +1,7 @@
 import './CopyLink.css'
 import { useState } from 'react'
-//also consider INTERFACE as option 
-//can also set Type/Interface as own FILE
-type CopyLinkProps = {
+
+interface CopyLinkProps {
     shortenedLink: string;
     originalLink: string;
 }

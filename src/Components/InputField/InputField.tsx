@@ -2,7 +2,7 @@ import './InputField.css'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-type InputFieldProps = {
+interface InputFieldProps  {
     submitOriginalLink: (linkInput: string) => void
 }
 
