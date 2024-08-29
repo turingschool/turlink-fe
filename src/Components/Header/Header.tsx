@@ -42,7 +42,10 @@ const Header: React.FC = () => {
                 </div>
                 <div className={`nav-links ${menuOpen ? 'open' : ''}`}>
                     {loggedIn && (
-                        <Link to="/dashboard" className="nav-link" onClick={toggleMenu}>Dashboard</Link>
+                        <>
+                            <Link to="/dashboard" className="nav-link" onClick={toggleMenu}>Dashboard</Link>
+                            <Link to="/mylinks" className="nav-link" onClick={toggleMenu}>My Links</Link> {/* Added My Links */}
+                        </>
                     )}
                     <Link to="/about" className="nav-link" onClick={toggleMenu}>About</Link>
                     {loggedIn ? (

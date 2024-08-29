@@ -6,6 +6,7 @@ import Dashboard from '../Dashboard/Dashboard';
 import Footer from '../Footer/Footer';
 import Login from '../Login/Login';
 import LandingPage from '../LandingPage/LandingPage';
+import MyLinks from '../MyLinks/MyLinks';
 import { isLoggedIn } from '../../utils/localStorage';
 
 // Placeholder components for routing
@@ -25,6 +26,7 @@ function App() {
           <Route path="/dashboard" element={<ProtectedRoute element={<Dashboard />} />} />
           <Route path="/about" element={<About />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/mylinks" element={<ProtectedRoute element={<MyLinks />} />} />
         </Routes>
         <Footer />
       </div>
