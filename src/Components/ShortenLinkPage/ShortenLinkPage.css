@@ -1,4 +1,4 @@
-.login-page {
+.shorten-link-page {
     font-family: 'Arial', sans-serif;
     color: #3C4040;
     display: flex;
@@ -13,12 +13,13 @@
 .shorten-link-header {
     width: 100%;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
     background-color: #82E1E6;
     height: 20vh;
     flex-direction: column;
     padding-top: 2em;
+    padding-left: 3em;
     box-sizing: border-box;
     margin: 0;
     margin-bottom: 5em;
