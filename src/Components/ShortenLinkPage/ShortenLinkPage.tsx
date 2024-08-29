@@ -1,3 +1,4 @@
+import React from 'react';
 import './ShortenLinkPage.css'
 import { useState } from 'react'
 import CopyLink from '../CopyLink/CopyLink'
@@ -7,7 +8,7 @@ import { useNavigate } from 'react-router-dom'
 
 
 const ShortenLinkPage: React.FC = () => {
-    const [id, setId] = useState<number>(1)
+    // const [id, setId] = useState<number>(1)
     const [originalLink, setOriginalLink] = useState<string>('')
     const [shortenedLink, setShortenedLink] = useState<string>('')
     const [tags, setTags] = useState<string[]>([])
@@ -15,16 +16,21 @@ const ShortenLinkPage: React.FC = () => {
     const navigate = useNavigate();
 
     const submitOriginalLink = (linkInput: string) => {
-        const userId = localStorage.getItem('userId');
-        console.log("GET USER ID: ", userId)
-        getShortLink(id, linkInput, navigate)
-        .then((data) => {
-            const attributes = data.data.attributes;
-            setOriginalLink(attributes.original)
-            setShortenedLink(attributes.short)
-            setTags(attributes.tags)
-            setUserId(attributes.user_id)
-        })
+        const userIdString = localStorage.getItem('userId');
+        const userId = userIdString ? parseInt(userIdString, 10) : null;
+
+        if (userId !== null && !isNaN(userId)) {
+            getShortLink(userId, linkInput, navigate)
+                .then((data) => {
+                    const attributes = data.data.attributes;
+                    setOriginalLink(attributes.original);
+                    setShortenedLink(attributes.short);
+                    setTags(attributes.tags);
+                    setUserId(attributes.user_id);
+                });
+        } else {
+            navigate('/login'); 
+        }
     }
 
     return (

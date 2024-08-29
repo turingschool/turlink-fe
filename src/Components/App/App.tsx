@@ -6,7 +6,7 @@ import Dashboard from '../Dashboard/Dashboard';
 import Footer from '../Footer/Footer';
 import Login from '../Login/Login';
 import LandingPage from '../LandingPage/LandingPage';
-import ShortenLinkPage from '../ShortenLinkPage/ShortenedLinkPage';
+import ShortenLinkPage from '../ShortenLinkPage/ShortenLinkPage';
 import { isLoggedIn } from '../../utils/localStorage';
 
 const About = () => <h1>About Page</h1>;
