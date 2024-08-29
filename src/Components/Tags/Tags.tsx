@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { getTags, addTagToLink, removeTagFromLink } from '../apiCalls/apiCalls';
 import './Tags.css';
-import { on } from 'events';
 
 interface TagsProps {
   linkId: string;
