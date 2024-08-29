@@ -1,43 +1,107 @@
 import React, { useEffect, useState } from 'react';
-import { getTags, addTagToLink, removeTagFromLink, getTagsForLink } from '../apiCalls/apiCalls';
+import { getTags, addTagToLink, removeTagFromLink } from '../apiCalls/apiCalls';
+import './Tags.css';
 
-type Tag = {
-  id: string;
-  attributes: {
-    name: string;
+interface TagsProps {
+  linkId: string;
+  currentTags: { id: string; name: string }[];
+  onClose: () => void;
+  onUpdateTags: (updatedTags: { id: string; name: string }[]) => void;
+}
+
+const Tags: React.FC<TagsProps> = ({ linkId, currentTags, onClose, onUpdateTags }) => {
+  const [availableTags, setAvailableTags] = useState<{ id: string; name: string }[]>([]);
+  const [selectedTags, setSelectedTags] = useState<{ id: string; name: string }[]>(currentTags);
+
+  useEffect(() => {
+    const fetchTags = async () => {
+      try {
+        const tagsData = await getTags();
+        const formattedTags = tagsData.map((tag: any) => ({
+          id: tag.id,
+          name: tag.attributes.name,
+        }));
+        setAvailableTags(formattedTags);
+      } catch (error) {
+        console.error('Error fetching tags:', error);
+      }
+    };
+
+    fetchTags();
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        onClose();
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, []);
+
+  const handleTagClick = async (tag: { id: string; name: string }) => {
+    try {
+      if (selectedTags.find((selectedTag) => selectedTag.id === tag.id)) {
+        const updatedTags = await removeTagFromLink(linkId, tag.id);
+        setSelectedTags(updatedTags);
+        onUpdateTags(updatedTags);
+      } else {
+        const updatedTags = await addTagToLink(linkId, tag.id);
+        setSelectedTags(updatedTags);
+        onUpdateTags(updatedTags);
+      }
+    } catch (error) {
+      console.error('Error updating tags:', error);
+    }
   };
+
+  const handleDeleteTag = async (tagId: string) => {
+    try {
+      const updatedTags = await removeTagFromLink(linkId, tagId);
+      setSelectedTags(updatedTags);
+      onUpdateTags(updatedTags);
+    } catch (error) {
+      console.error('Error deleting tag:', error);
+    }
+  };
+
+  const handleOutsideClick = (event: React.MouseEvent<HTMLDivElement>) => {
+    if ((event.target as HTMLElement).classList.contains('tags-popup')) {
+      onClose();
+    }
+  };
+
+  return (
+    <div className="tags-popup" onClick={handleOutsideClick}>
+      <div className="tags-popup-content">
+        <h2>Manage Tags for Link</h2>
+        <button className="close-button" onClick={onClose}>
+          X
+        </button>
+        <div className="tag-list">
+          {availableTags.map((tag) => (
+            <div
+              key={tag.id}
+              className={`tag-item ${selectedTags.find((selectedTag) => selectedTag.id === tag.id) ? 'selected' : ''}`}
+            >
+              <span onClick={() => handleTagClick(tag)}>{tag.name}</span>
+              {selectedTags.find((selectedTag) => selectedTag.id === tag.id) && (
+                <button
+                  className="delete-tag-button"
+                  onClick={() => handleDeleteTag(tag.id)}
+                >
+                  Delete
+                </button>
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
 };
 
-type TagsProps = {
-    linkId: string;
-  };
-  
-  const Tags: React.FC<TagsProps> = ({ linkId }) => {
-    const [allTags, setAllTags] = useState<Tag[]>([]);
-    const [linkTags, setLinkTags] = useState<Tag[]>([]);
-    const [showTags, setShowTags] = useState(false);
-    
-    useEffect(() => {
-    const fetchTags = async () => {
-        const tags = await getTags();
-        setAllTags(tags);
-      };
-      fetchTags();
-
-      const fetchLinkTags = async () => {
-        const tags = await getTagsForLink(linkId);
-        setLinkTags(tags);
-      };
-      fetchLinkTags();
-    }, [linkId]);
-
-    const handleAddTag = async (tagId: string) => {
-        const updatedTags = await addTagToLink(linkId, tagId);
-        setLinkTags(updatedTags);
-      };
-    
-      const handleRemoveTag = async (tagId: string) => {
-        const updatedTags = await removeTagFromLink(linkId, tagId);
-        setLinkTags(updatedTags);
-      };
-    
+export default Tags;
