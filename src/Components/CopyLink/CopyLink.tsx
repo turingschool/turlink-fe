@@ -20,6 +20,9 @@ const CopyLink: React.FC<CopyLinkProps>= ({shortenedLink, originalLink}) => {
     return (
         <div className='copy-link-body'>
             <div className='shortened-link-container'>
+                <p className='copy-message-body'>
+                    {copyMessage}
+                </p> 
                 <div className='submission-container'>
                     <input 
                         type="text" 
@@ -31,9 +34,7 @@ const CopyLink: React.FC<CopyLinkProps>= ({shortenedLink, originalLink}) => {
                         onClick={handleCopy}
                     >Copy</button>
                 </div>
-                <p className='copy-message-body'>
-                    {copyMessage}
-                </p> 
+
             </div>
             <div className='original-link-container'>
                 <h2 className='original-link-label'>Original URL:</h2>
