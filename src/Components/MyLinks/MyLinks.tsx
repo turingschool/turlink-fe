@@ -56,4 +56,33 @@ const MyLinks: React.FC = () => {
           await fetchUserLinks(userId);
         }
       };
+      return (
+        <div className="my-links-container">
+          <h2>My Links</h2>
+          {links.length === 0 ? (
+            <p>No links available.</p>
+          ) : (
+            links.map((link) => (
+              <div key={link.id} className="link-item">
+                <p>Original: {link.original}</p>
+                <p>
+                  Short: <a href={link.short} target="_blank" rel="noopener noreferrer">{link.short}</a>
+                </p>
+                <button onClick={() => openTagsPopup(link)}>Manage Tags</button>
+              </div>
+            ))
+          )}
     
+          {isPopupOpen && selectedLink && (
+            <Tags
+              linkId={selectedLink.id.toString()}
+              currentTags={tagsForLink}
+              onClose={closeTagsPopup}
+              onUpdateTags={handleTagUpdate}
+            />
+          )}
+        </div>
+      );
+    };
+    
+    export default MyLinks;
