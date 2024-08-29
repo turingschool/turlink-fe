@@ -1,4 +1,4 @@
-import './ShortenedLinkPage.css'
+import './ShortenLinkPage.css'
 import { useState } from 'react'
 import CopyLink from '../CopyLink/CopyLink'
 import InputField from '../InputField/InputField'
@@ -6,7 +6,7 @@ import { getShortLink } from '../apiCalls/apiCalls'
 import { useNavigate } from 'react-router-dom'
 
 
-const ShortenedLinkPage: React.FC = () => {
+const ShortenLinkPage: React.FC = () => {
     const [id, setId] = useState<number>(1)
     const [originalLink, setOriginalLink] = useState<string>('')
     const [shortenedLink, setShortenedLink] = useState<string>('')
@@ -26,11 +26,14 @@ const ShortenedLinkPage: React.FC = () => {
     }
 
     return (
-        <div className='shortened-link-wrapper'>
+        <section className='shorten-link-page'>
+            <div className="shorten-link-header">
+                <p className="shorten-link-header-text">Shorten Your Link</p>
+            </div>
             <InputField submitOriginalLink={submitOriginalLink}/>
             <CopyLink shortenedLink={shortenedLink} originalLink={originalLink}/>
-        </div>
+        </section>
     )
 }
 
-export default ShortenedLinkPage
+export default ShortenLinkPage
