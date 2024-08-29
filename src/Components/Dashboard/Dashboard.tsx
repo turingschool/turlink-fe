@@ -13,22 +13,14 @@ interface Tag {
     name: string;
 }
 
-const popularLinks: Link[] = [
-    { name: "https://turlink.tech/edf456", clickCount: 346, tags: ["JavaScript", "UI", "Video"] },
-    { name: "https://turlink.tech/edf456", clickCount: 229, tags: ["Ruby", "Rails", "Blog"] },
-    { name: "https://turlink.tech/edf456", clickCount: 216, tags: ["Ruby", "Rails", "Docs"] },
-    { name: "https://turlink.tech/edf456", clickCount: 189, tags: ["JavaScript", "Blog"] },
-    { name: "https://turlink.tech/edf456", clickCount: 177, tags: ["Project Mgmt", "Blog"] },
-    { name: "https://turlink.tech/edf456", clickCount: 162, tags: ["Vue.js"] },
-];
-
 const Dashboard: React.FC = () => {
+    const [links, setLinks] = useState<Link[]>([]);
     const [tags, setTags] = useState<Tag[]>([]);
     const [selectedTag, setSelectedTag] = useState<string>("");
 
     useEffect(() => {
-        fetchTopLinks()
-    })
+        fetchTopLinks().then((fetchedLinks) => setLinks(fetchedLinks))
+    }, [])
     
     useEffect(() => {
         fetchTags().then((fetchedTags) => setTags(fetchedTags))
@@ -47,20 +39,24 @@ const Dashboard: React.FC = () => {
                 <h2>Popular Links</h2>
                 <div className="links-table">
                     <div className="table-header">
-                        <div className="header-item"></div>
+                        <div className="header-item">Shortened Link</div>
                         <div className="header-item">Click Count</div>
                         <div className="header-item">Tags</div>
                     </div>
-                    {popularLinks.map((link, index) => (
+                    {links.map((link, index) => (
                         <div key={index} className="table-row">
                             <div className="table-item link-name">
                                 <a href={link.name}>{link.name}</a>
                             </div>
                             <div className="table-item click-count">{link.clickCount}</div>
                             <div className="table-item tags">
-                                {link.tags.map((tag, idx) => (
-                                    <span key={idx} className="tag">{tag}</span>
-                                ))}
+                                {link.tags.length > 0 ? (
+                                    link.tags.map((tag, idx) => (
+                                        <span key={idx} className="tag">{tag}</span>
+                                    ))
+                                ) : (
+                                    <span className="no-tags">no tags assigned to this link</span>
+                                )}
                             </div>
                         </div>
                     ))}

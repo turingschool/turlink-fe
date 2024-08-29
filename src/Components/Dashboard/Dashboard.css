@@ -116,3 +116,22 @@ footer {
     padding: 20px;
     margin-top: 0;
 }
+
+.tags {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.tag {
+    background-color: #ddd;
+    border-radius: 12px;
+    padding: 5px 10px;
+    font-size: 0.9em;
+    color: #333;
+    margin-right: 1em;
+    margin-bottom: 1em; 
+}
+
+.no-tags {
+    font-weight: bold;
+}
