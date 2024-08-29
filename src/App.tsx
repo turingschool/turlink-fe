@@ -4,7 +4,7 @@ import './App.css';
 import Header from './Components/Header/Header';
 import Footer from './Components/Footer/Footer';
 import LandingPage from './Components/LandingPage/LandingPage';
-import ShortenLinkPage from './Components/ShortenLinkPage/ShortenedLinkPage';
+import ShortenedLinkPage from './Components/ShortenedLinkPage/ShortenedLinkPage'
 
 //placeholder components for routing
 const Dashboard = () => <h1>Dashboard Page</h1>;

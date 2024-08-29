@@ -13,3 +13,44 @@ export function getShortLink(id: number, originalLink: string, navigate: (path: 
         })
       .catch((error) => console.log(error))
 }
+
+export function fetchTags (){
+    return fetch("https://turlink-be-53ba7254a7c1.herokuapp.com/api/v1/tags")
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error("Network response was not ok");
+            }
+            return response.json();
+        })
+        .then((data) => {
+            return data.data.map((tag: any) => ({
+                id: tag.id,
+                name: tag.attributes.name,
+            }));
+        })
+        .catch((error) => {
+            console.error("Error fetching tags:", error);
+            return [];
+        });
+};
+
+export function fetchTopLinks() {
+    return fetch("https://turlink-be-53ba7254a7c1.herokuapp.com/api/v1/top_links")
+    .then((response) => {
+        if (!response.ok) {
+            throw new Error("Network response was not ok");
+        }
+        return response.json();
+    })
+    .then(data => {
+        return data.data.map((link: any) => ({
+            name: link.attributes.short,
+            clickCount: link.attributes.click_count,
+            tags: link.attributes.tags.map((tag: any) => tag.name),
+        }));
+    })
+    .catch((error) => {
+        console.error("Error fetching top links:", error);
+        return [];
+    });
+}

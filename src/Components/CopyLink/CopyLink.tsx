@@ -1,13 +1,13 @@
 import './CopyLink.css'
 import { useState } from 'react'
 
-interface CopyLinkProps {
+type CopyLinkProps = {
     shortenedLink: string;
     originalLink: string;
 }
 
 const CopyLink: React.FC<CopyLinkProps>= ({shortenedLink, originalLink}) => {
-    const [copyMessage, setCopyMessage] = useState<string>('')
+    const [copyMessage, setCopyMessage] = useState('')
 
     const handleCopy = () => {
         navigator.clipboard.writeText(shortenedLink)
@@ -18,23 +18,20 @@ const CopyLink: React.FC<CopyLinkProps>= ({shortenedLink, originalLink}) => {
     }
 
     return (
-        <div className='copy-link-body'>
+        <div className='shortened-link-wrapper'>
             <div className='shortened-link-container'>
+                <input 
+                    type="text" 
+                    value={shortenedLink}
+                    className="shortened-link-input"
+                    placeholder="Shorten Link Above"
+                />
+                <button className='copy-button'
+                    onClick={handleCopy}
+                >Copy</button>
                 <p className='copy-message-body'>
                     {copyMessage}
                 </p> 
-                <div className='submission-container'>
-                    <input 
-                        type="text" 
-                        value={shortenedLink}
-                        className="copy-link-input"
-                        placeholder="Shorten Link Above"
-                    />
-                    <button className='copy-button'
-                        onClick={handleCopy}
-                    >Copy</button>
-                </div>
-
             </div>
             <div className='original-link-container'>
                 <h2 className='original-link-label'>Original URL:</h2>
