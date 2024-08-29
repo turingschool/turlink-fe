@@ -18,14 +18,17 @@ const InputField: React.FC <InputFieldProps>= ({submitOriginalLink}) => {
 
     return (
         <div className='input-body'>
+            <p className='shorten-link-text'>Shorten Link</p>
             <input 
                 type="text" 
                 placeholder="Paste Your Link" 
-                className="input-field"
+                className="shorten-link-input"
                 value={linkInput}
                 onChange={(e) => setLinkInput(e.target.value)}
             />
-            <button onClick={() => handleClick()}>Shorten Link</button>
+            <button className='shorten-link-button'
+                onClick={() => handleClick()}
+                >Shorten Link</button>
         </div>
     )
 }
