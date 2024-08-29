@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { getTags, addTagToLink, removeTagFromLink } from '../apiCalls/apiCalls';
 import './Tags.css';
+import { on } from 'events';
 
 interface TagsProps {
   linkId: string;
@@ -40,7 +41,8 @@ const Tags: React.FC<TagsProps> = ({ linkId, currentTags, onClose, onUpdateTags 
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
     };
-  }, []);
+  }, [onClose]);
+ 
 
   const handleTagClick = async (tag: { id: string; name: string }) => {
     try {

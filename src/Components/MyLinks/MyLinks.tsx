@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { getUserLinks, getTagsForLink, addTagToLink, removeTagFromLink } from '../apiCalls/apiCalls';
+import { getUserLinks, getTagsForLink } from '../apiCalls/apiCalls';
 import Tags from '../Tags/Tags';
 import './MyLinks.css';
 
