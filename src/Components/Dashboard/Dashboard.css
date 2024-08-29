@@ -135,3 +135,8 @@ footer {
 .no-tags {
     font-weight: bold;
 }
+
+.no-filter {
+    font-weight: bold;
+    color: rgb(162, 0, 0);
+}
