@@ -71,7 +71,7 @@
 
 .delete-tag-button {
   background-color: transparent;
-  border: 20px, black;
+  border: none;
   color: #ff4d4d;
   cursor: pointer;
   font-size: 0.9em;
