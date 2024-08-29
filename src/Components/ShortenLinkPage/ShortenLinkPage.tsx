@@ -1,6 +1,6 @@
 import React from 'react';
 import './ShortenLinkPage.css'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import CopyLink from '../CopyLink/CopyLink'
 import InputField from '../InputField/InputField'
 import { getShortLink } from '../apiCalls/apiCalls'
@@ -15,11 +15,23 @@ const ShortenLinkPage: React.FC = () => {
     const [userId, setUserId] = useState<string>('')
     const navigate = useNavigate();
 
+    useEffect(() => {
+        const userIdString = localStorage.getItem('userId');
+        const userId = userIdString ? parseInt(userIdString, 10) : null;
+        if (userId === null || isNaN(userId)) {
+            navigate('/login');
+        } else {
+            setUserId(userId.toString())
+        }
+    }, [navigate]);
+
+
     const submitOriginalLink = (linkInput: string) => {
         const userIdString = localStorage.getItem('userId');
         const userId = userIdString ? parseInt(userIdString, 10) : null;
 
         if (userId !== null && !isNaN(userId)) {
+            console.log("GET USER ID: ", userId);
             getShortLink(userId, linkInput, navigate)
                 .then((data) => {
                     const attributes = data.data.attributes;
