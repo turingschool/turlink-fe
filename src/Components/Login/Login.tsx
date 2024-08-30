@@ -19,7 +19,7 @@ const Login = (): React.JSX.Element => {
 
     const handleLogin = (event: MouseEvent<HTMLButtonElement>) => {
         event.preventDefault();
-        const user = {
+        const user: User = {
             email,
             password,
         };
