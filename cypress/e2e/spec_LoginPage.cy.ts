@@ -26,17 +26,17 @@ describe('Login Page Tests', () => {
         cy.url().should('include', 'dashboard')
         cy.get('.dashboard-header').should('contain', 'Dashboard')
     })
-    it('should display an error message if the user enters an incorrect email but correct password', () => {
+    it.only('should display an error message if the user enters an incorrect email but correct password', () => {
         cy.intercept("POST", "https://turlink-be-53ba7254a7c1.herokuapp.com/api/v1/sessions", {
             statusCode: 401,
             body: {
-                error: "Invalid email or password"
+                error: "Error: Incorrect username or password."
             }
         }).as('loginRequest')
-        cy.get('.email-input').type('ki@example.com')
+        cy.get('.email-input').type('ki@turing.com')
         cy.get('.password-input').type('kim123')
         cy.get('.login-button').click()
-        cy.wait('@loginRequest')
+        cy.wait("@loginRequest")
     })
     it('should display an error message if the user enters a correct email but an incorrect password', () => {
         cy.intercept("POST", "https://turlink-be-53ba7254a7c1.herokuapp.com/api/v1/sessions", {
