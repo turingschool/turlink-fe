@@ -22,7 +22,7 @@ const CopyLink: React.FC<CopyLinkProps>= ({shortenedLink, originalLink}) => {
             <div className='shortened-link-container'>
                 <input 
                     type="text" 
-                    value={shortenedLink}
+                    defaultValue={shortenedLink}
                     className="shortened-link-input"
                     placeholder="Shorten Link Above"
                 />

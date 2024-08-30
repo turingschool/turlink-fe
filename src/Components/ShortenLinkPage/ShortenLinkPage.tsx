@@ -8,7 +8,6 @@ import { useNavigate } from 'react-router-dom'
 
 
 const ShortenLinkPage: React.FC = () => {
-    // const [id, setId] = useState<number>(1)
     const [originalLink, setOriginalLink] = useState<string>('')
     const [shortenedLink, setShortenedLink] = useState<string>('')
     const [tags, setTags] = useState<string[]>([])
@@ -31,7 +30,6 @@ const ShortenLinkPage: React.FC = () => {
         const userId = userIdString ? parseInt(userIdString, 10) : null;
 
         if (userId !== null && !isNaN(userId)) {
-            console.log("GET USER ID: ", userId);
             getShortLink(userId, linkInput, navigate)
                 .then((data) => {
                     const attributes = data.data.attributes;
