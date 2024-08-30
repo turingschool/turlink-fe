@@ -9,21 +9,29 @@ interface TagsProps {
   onUpdateTags: (updatedTags: { id: string; name: string }[]) => void;
 }
 
+interface Tag {
+  id: string;
+  attributes: {
+    name: string;
+  };
+}
+
 const Tags: React.FC<TagsProps> = ({ linkId, currentTags, onClose, onUpdateTags }) => {
   const [availableTags, setAvailableTags] = useState<{ id: string; name: string }[]>([]);
   const [selectedTags, setSelectedTags] = useState<{ id: string; name: string }[]>(currentTags);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null); 
 
   useEffect(() => {
     const fetchTags = async () => {
       try {
-        const tagsData = await getTags();
-        const formattedTags = tagsData.map((tag: any) => ({
+        const tagsData: Tag[] = await getTags(); 
+        const simplifiedTags = tagsData.map(tag => ({
           id: tag.id,
           name: tag.attributes.name,
         }));
-        setAvailableTags(formattedTags);
+        setAvailableTags(simplifiedTags);
       } catch (error) {
-        console.error('Error fetching tags:', error);
+        setErrorMessage('Failed to fetch tags. Please try again later.'); 
       }
     };
 
@@ -41,7 +49,6 @@ const Tags: React.FC<TagsProps> = ({ linkId, currentTags, onClose, onUpdateTags 
       window.removeEventListener('keydown', handleKeyDown);
     };
   }, [onClose]);
- 
 
   const handleTagClick = async (tag: { id: string; name: string }) => {
     try {
@@ -49,13 +56,15 @@ const Tags: React.FC<TagsProps> = ({ linkId, currentTags, onClose, onUpdateTags 
         const updatedTags = await removeTagFromLink(linkId, tag.id);
         setSelectedTags(updatedTags);
         onUpdateTags(updatedTags);
+        setErrorMessage(null);
       } else {
         const updatedTags = await addTagToLink(linkId, tag.id);
         setSelectedTags(updatedTags);
         onUpdateTags(updatedTags);
+        setErrorMessage(null);
       }
     } catch (error) {
-      console.error('Error updating tags:', error);
+      setErrorMessage('Error updating tags. Please try again later.');
     }
   };
 
@@ -64,8 +73,9 @@ const Tags: React.FC<TagsProps> = ({ linkId, currentTags, onClose, onUpdateTags 
       const updatedTags = await removeTagFromLink(linkId, tagId);
       setSelectedTags(updatedTags);
       onUpdateTags(updatedTags);
+      setErrorMessage(null); 
     } catch (error) {
-      console.error('Error deleting tag:', error);
+      setErrorMessage('Error deleting tag. Please try again later.'); 
     }
   };
 
@@ -79,6 +89,7 @@ const Tags: React.FC<TagsProps> = ({ linkId, currentTags, onClose, onUpdateTags 
     <div className="tags-popup" onClick={handleOutsideClick}>
       <div className="tags-popup-content">
         <h2>Manage Tags for Link</h2>
+        {errorMessage && <p className="error-message">{errorMessage}</p>}
         <button className="close-button" onClick={onClose}>
           X
         </button>

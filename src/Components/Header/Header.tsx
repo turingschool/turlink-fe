@@ -44,7 +44,7 @@ const Header: React.FC = () => {
                     {loggedIn && (
                         <>
                             <Link to="/dashboard" className="nav-link" onClick={toggleMenu}>Dashboard</Link>
-                            <Link to="/mylinks" className="nav-link" onClick={toggleMenu}>My Links</Link> {/* Added My Links */}
+                            <Link to="/mylinks" className="nav-link" onClick={toggleMenu}>My Links</Link> 
                         </>
                     )}
                     <Link to="/about" className="nav-link" onClick={toggleMenu}>About</Link>
