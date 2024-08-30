@@ -19,7 +19,7 @@ const Login = (): React.JSX.Element => {
 
     const handleLogin = (event: MouseEvent<HTMLButtonElement>) => {
         event.preventDefault();
-        const user = {
+        const user: User = {
             email,
             password,
         };
@@ -61,6 +61,7 @@ const Login = (): React.JSX.Element => {
             return response.json();
         })
         .then(data => {
+            console.log(data)
             const userId = data.data.id;
             setLogin(userId); 
             setIsError(false);
