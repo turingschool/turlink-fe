@@ -82,7 +82,7 @@ const Dashboard: React.FC = () => {
                                             <span key={idx} className="tag">{tag}</span>
                                         ))
                                     ) : (
-                                        <span className="tag">no tags for this link</span>
+                                        <span className="no-tag">No tags assigned for this link</span>
                                     )}
                                 </div>
                             </div>
