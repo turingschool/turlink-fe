@@ -4,6 +4,7 @@ import './App.css';
 import Header from './Components/Header/Header';
 import Footer from './Components/Footer/Footer';
 import LandingPage from './Components/LandingPage/LandingPage';
+import ShortenedLinkPage from './Components/ShortenedLinkPage/ShortenedLinkPage'
 
 //placeholder components for routing
 const Dashboard = () => <h1>Dashboard Page</h1>;
@@ -15,6 +16,7 @@ function App() {
     <Router>
       <div className="App">
       <Header />
+      <ShortenedLinkPage />
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/dashboard" element={<Dashboard />} />
