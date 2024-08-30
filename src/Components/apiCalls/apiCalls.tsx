@@ -1,19 +1,18 @@
-export function getShortLink(id: number, originalLink: string, navigate: (path: string) => void): Promise<any> {
-    return fetch(`https://turlink-be-53ba7254a7c1.herokuapp.com/api/v1/users/${id}/links?link=${originalLink}`, {
-        method: "POST",
-        headers : {
-            'Content-Type': 'application/json'
-        }
-      })
-      .then((response) => {
-            if(!response.ok){
-                throw new Error(`Error on POST message`)
-            } else {
-                return response.json() }
-        })
-      .catch((error) => console.log(error))
-}
+export const getShortLink = async (userId: string, linkInput: string) => {
+  const response = await fetch(`https://turlink-be-53ba7254a7c1.herokuapp.com/api/v1/users/${userId}/links?link=${encodeURIComponent(linkInput)}`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
 
+  if (!response.ok) {
+    throw new Error('Failed to shorten link');
+  }
+
+  const data = await response.json();
+  return data;
+};
 export function fetchTags (){
     return fetch("https://turlink-be-53ba7254a7c1.herokuapp.com/api/v1/tags")
         .then((response) => {
@@ -113,5 +112,17 @@ export const getUserLinks = async (userId: string) => {
     throw new Error('Failed to fetch user links');
   }
   const data = await response.json();
-  return data.data.attributes.links; 
+  console.log('API Response:', data); 
+
+  if (data.data && data.data.attributes && Array.isArray(data.data.attributes.links)) {
+    return data.data.attributes.links.map((link: any) => ({
+      id: link.id,
+      original: link.original,
+      short: link.short,
+      created_at: link.created_at,
+      updated_at: link.updated_at,
+    }));
+  } else {
+    throw new Error('Unexpected data structure');
+  }
 };

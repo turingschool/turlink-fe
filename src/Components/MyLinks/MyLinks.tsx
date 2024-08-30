@@ -2,14 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { getUserLinks, getTagsForLink } from '../apiCalls/apiCalls';
 import Tags from '../Tags/Tags';
 import './MyLinks.css';
-
-interface Link {
-  id: number;
-  original: string;
-  short: string;
-  created_at: string;
-  updated_at: string;
-}
+import { Link } from '../../utils/types';
 
 const MyLinks: React.FC = () => {
   const [links, setLinks] = useState<Link[]>([]);
@@ -17,7 +10,7 @@ const MyLinks: React.FC = () => {
   const [selectedLink, setSelectedLink] = useState<Link | null>(null);
   const [tagsForLink, setTagsForLink] = useState<{ id: string; name: string }[]>([]);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
-  const userId = JSON.parse(localStorage.getItem('userData') || '{}').id;
+  const userId = localStorage.getItem('userId') || '';
 
   useEffect(() => {
     if (userId) {
@@ -28,10 +21,11 @@ const MyLinks: React.FC = () => {
   const fetchUserLinks = async (userId: string) => {
     try {
       const links = await getUserLinks(userId);
-      setLinks(links);
-      setErrorMessage(null); 
+      setLinks(links); 
+      setErrorMessage(null);
     } catch (error) {
-      setErrorMessage('Error fetching user links. Please try again later.'); 
+      console.error('Error fetching user links:', error);
+      setErrorMessage('Error fetching user links. Please try again later.');
     }
   };
 
@@ -57,7 +51,7 @@ const MyLinks: React.FC = () => {
     if (selectedLink) {
       try {
         await fetchUserLinks(userId);
-        setErrorMessage(null); 
+        setErrorMessage(null);
       } catch (error) {
         setErrorMessage('Error updating links. Please try again later.');
       }
@@ -67,7 +61,7 @@ const MyLinks: React.FC = () => {
   return (
     <div className="my-links-container">
       <h2>My Links</h2>
-      {errorMessage && <p className="error-message">{errorMessage}</p>} 
+      {errorMessage && <p className="error-message">{errorMessage}</p>}
       {links.length === 0 ? (
         <p>No links available.</p>
       ) : (
