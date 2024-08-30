@@ -6,10 +6,10 @@ import Dashboard from '../Dashboard/Dashboard';
 import Footer from '../Footer/Footer';
 import Login from '../Login/Login';
 import LandingPage from '../LandingPage/LandingPage';
+import ShortenLinkPage from '../ShortenLinkPage/ShortenLinkPage';
 import MyLinks from '../MyLinks/MyLinks';
 import { isLoggedIn } from '../../utils/localStorage';
 
-// Placeholder components for routing
 const About = () => <h1>About Page</h1>;
 
 const ProtectedRoute = ({ element }: { element: JSX.Element }) => {
@@ -23,10 +23,12 @@ function App() {
         <Header />
         <Routes>
           <Route path="/" element={<LandingPage />} />
-          <Route path="/dashboard" element={<ProtectedRoute element={<Dashboard />} />} />
-          <Route path="/about" element={<About />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/mylinks" element={<ProtectedRoute element={<MyLinks />} />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/shortenlink" element={<ProtectedRoute element={<ShortenLinkPage />} />} />
+          <Route path="/dashboard" element={<ProtectedRoute element={<Dashboard />} />} />
+          <Route path="/my-links" element={<ProtectedRoute element={<MyLinks />} />} />
+          <Route path="*" element={<Navigate to="/" />} />
         </Routes>
         <Footer />
       </div>
