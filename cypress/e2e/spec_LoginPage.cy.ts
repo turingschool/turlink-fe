@@ -1,5 +1,3 @@
-import userEvent from "@testing-library/user-event"
-
 describe('Login Page Tests', () => {
     beforeEach(() => {
         cy.visit('http://localhost:3000/login')
@@ -16,8 +14,10 @@ describe('Login Page Tests', () => {
         cy.intercept("POST", "https://turlink-be-53ba7254a7c1.herokuapp.com/api/v1/sessions", {
             statusCode: 201,
             body: {
-                "username": "kim@example.com",
-                "passsword": "kim123"
+                data: {
+                    "username": "kim@example.com",
+                    "passsword": "kim123"
+                }
             }
         })
         cy.get('.email-input').type('kim@example.com')
@@ -26,28 +26,38 @@ describe('Login Page Tests', () => {
         cy.url().should('include', 'dashboard')
         cy.get('.dashboard-header').should('contain', 'Dashboard')
     })
-    it.only('should display an error message if the user enters an incorrect email but correct password', () => {
+    it('should display an error message if the user enters an incorrect email but correct password', () => {
         cy.intercept("POST", "https://turlink-be-53ba7254a7c1.herokuapp.com/api/v1/sessions", {
             statusCode: 401,
             body: {
-                error: "Error: Incorrect username or password."
+                "errors": [
+                    {
+                      "message": "Invalid email or password"
+                    }
+                  ]
             }
-        }).as('loginRequest')
+        })
         cy.get('.email-input').type('ki@turing.com')
         cy.get('.password-input').type('kim123')
         cy.get('.login-button').click()
-        cy.wait("@loginRequest")
+        cy.get('.login-error-message').should('contain', "We can't find that username and password. Please try again.")
     })
     it('should display an error message if the user enters a correct email but an incorrect password', () => {
         cy.intercept("POST", "https://turlink-be-53ba7254a7c1.herokuapp.com/api/v1/sessions", {
             statusCode: 401,
             body: {
-                error: "Invalid email or password"
+                "errors": [
+                    {
+                      "message": "Invalid email or password"
+                    }
+                  ]
             }
-        }).as('loginRequest')
+        })
         cy.get('.email-input').type('kim@example.com')
         cy.get('.password-input').type('kim12')
         cy.get('.login-button').click()
+        cy.get('.login-error-message').should('contain', "We can't find that username and password. Please try again.")
+        
     })
     it('should display an error message if the user does not enter an email or password and clicks submit', () => {
         cy.get('.login-button').click()
@@ -73,8 +83,10 @@ describe('Login Page Tests', () => {
         cy.intercept("POST", "https://turlink-be-53ba7254a7c1.herokuapp.com/api/v1/sessions", {
             statusCode: 201,
             body: {
-                "username": "kim@example.com",
-                "passsword": "kim123"
+                data: {
+                    "username": "kim@example.com",
+                    "passsword": "kim123"
+                }
             }
         })
         cy.get('.email-input').type('kim@example.com')
@@ -84,6 +96,5 @@ describe('Login Page Tests', () => {
         cy.get('.dashboard-header').should('contain', 'Dashboard')
         cy.get('.logout-button').click()
         cy.url().should('include', '/')
-
     })
 })

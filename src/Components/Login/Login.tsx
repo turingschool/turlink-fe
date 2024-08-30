@@ -53,21 +53,22 @@ const Login = (): React.JSX.Element => {
             },
             body: JSON.stringify(user)
         })
-            .then(response => {
-                if (!response.ok) {
-                    setIsError(true);
-                    throw new Error("Incorrect username or password.");
-                }
-                return response.json();
-            })
-            .then(data => {
-                console.log('Response from API:', data);
-                setLogin();  
-                setIsError(false);
-                navigate('/dashboard'); 
-                window.dispatchEvent(new Event('storage')); 
-            })
-            .catch(error => console.log(error));
+        .then(response => {
+            if (!response.ok) {
+                setIsError(true);
+                throw new Error("Incorrect username or password.");
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log(data)
+            const userId = data.data.id;
+            setLogin(userId); 
+            setIsError(false);
+            navigate('/dashboard'); 
+            window.dispatchEvent(new Event('storage')); 
+        })
+        .catch(error => console.log(error));
     };
 
     return (
