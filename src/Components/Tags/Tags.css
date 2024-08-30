@@ -81,3 +81,12 @@
 .delete-tag-button:hover {
   color: #ff0000;
 }
+
+.error-message {
+  color: #ff4d4d;
+  background-color: #ffe5e5;
+  padding: 10px;
+  border-radius: 5px;
+  margin: 10px 0;
+  font-size: 0.9em;
+}
