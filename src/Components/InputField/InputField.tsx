@@ -2,12 +2,13 @@ import './InputField.css'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-type InputFieldProps = {
-    submitOriginalLink: (link: string) => void
+interface InputFieldProps  {
+    submitOriginalLink: (linkInput: string) => void
 }
 
 const InputField: React.FC <InputFieldProps>= ({submitOriginalLink}) => {
-    const [linkInput, setLinkInput] = useState('')
+    
+    const [linkInput, setLinkInput] = useState<string>('')
 
 
     const handleClick = () => {
@@ -17,14 +18,17 @@ const InputField: React.FC <InputFieldProps>= ({submitOriginalLink}) => {
 
     return (
         <div className='input-body'>
+            <p className='shorten-link-text'>Shorten Link</p>
             <input 
                 type="text" 
                 placeholder="Paste Your Link" 
-                className="input-field"
+                className="shorten-link-input"
                 value={linkInput}
                 onChange={(e) => setLinkInput(e.target.value)}
             />
-            <button onClick={() => handleClick()}>Shorten Link</button>
+            <button className='shorten-link-button'
+                onClick={() => handleClick()}
+                >Shorten Link</button>
         </div>
     )
 }

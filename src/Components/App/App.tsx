@@ -6,9 +6,9 @@ import Dashboard from '../Dashboard/Dashboard';
 import Footer from '../Footer/Footer';
 import Login from '../Login/Login';
 import LandingPage from '../LandingPage/LandingPage';
+import ShortenLinkPage from '../ShortenLinkPage/ShortenLinkPage';
 import { isLoggedIn } from '../../utils/localStorage';
 
-// Placeholder components for routing
 const About = () => <h1>About Page</h1>;
 
 const ProtectedRoute = ({ element }: { element: JSX.Element }) => {
@@ -19,14 +19,15 @@ function App() {
   return (
     <Router>
       <div className="App">
-        <Header />
-        <Routes>
-          <Route path="/" element={<LandingPage />} />
-          <Route path="/dashboard" element={<ProtectedRoute element={<Dashboard />} />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/login" element={<Login />} />
-        </Routes>
-        <Footer />
+      <Header />
+      <Routes>
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/shortenlink" element={<ShortenLinkPage />} />
+      </Routes>
+      <Footer />
       </div>
     </Router>
   );
