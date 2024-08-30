@@ -140,3 +140,7 @@ footer {
     font-weight: bold;
     color: rgb(162, 0, 0);
 }
+
+.current {
+    text-decoration: underline;
+}

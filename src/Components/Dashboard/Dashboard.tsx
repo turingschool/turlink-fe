@@ -102,11 +102,11 @@ const Dashboard: React.FC = () => {
                     ))}
                 </select>
                 <div className="current-filters">
-                    <p>Current filters:</p>
+                    <p className="current">Current filters:</p>
                     {selectedTag ? (
                         <span className="tag">{selectedTag}</span>
                     ) : (
-                        <span className="no-filter">No filter applied yet, select one from the dropdown.</span>
+                        <span className="no-filter">No filter applied yet, select one from the dropdown to see the top 5 links for that tag.</span>
                     )}
                 </div>
             </section>
