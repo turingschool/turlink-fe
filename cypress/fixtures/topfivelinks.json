@@ -1,0 +1,209 @@
+{
+  "data": [
+    {
+      "id": "1",
+      "type": "link",
+      "attributes": {
+        "original": "original-long-link-test.com",
+        "short": "tur.link/dc79d5e0",
+        "user_id": 1,
+        "tags": [
+          {
+            "id": 4,
+            "name": "rails",
+            "created_at": "2024-08-27T15:54:40.162Z",
+            "updated_at": "2024-08-27T15:54:40.162Z"
+          },
+          {
+            "id": 5,
+            "name": "video",
+            "created_at": "2024-08-27T15:54:40.173Z",
+            "updated_at": "2024-08-27T15:54:40.173Z"
+          },
+          {
+            "id": 6,
+            "name": "blog",
+            "created_at": "2024-08-27T15:54:40.178Z",
+            "updated_at": "2024-08-27T15:54:40.178Z"
+          },
+          {
+            "id": 8,
+            "name": "python",
+            "created_at": "2024-08-27T15:54:40.188Z",
+            "updated_at": "2024-08-27T15:54:40.188Z"
+          },
+          {
+            "id": 11,
+            "name": "conference talk",
+            "created_at": "2024-08-27T15:54:40.202Z",
+            "updated_at": "2024-08-27T15:54:40.202Z"
+          },
+          {
+            "id": 15,
+            "name": "Flask",
+            "created_at": "2024-08-27T15:54:40.221Z",
+            "updated_at": "2024-08-27T15:54:40.221Z"
+          },
+          {
+            "id": 18,
+            "name": "Express.js",
+            "created_at": "2024-08-27T15:54:40.236Z",
+            "updated_at": "2024-08-27T15:54:40.236Z"
+          },
+          {
+            "id": 19,
+            "name": "next.js",
+            "created_at": "2024-08-27T15:54:40.241Z",
+            "updated_at": "2024-08-27T15:54:40.241Z"
+          },
+          {
+            "id": 19,
+            "name": "next.js",
+            "created_at": "2024-08-27T15:54:40.241Z",
+            "updated_at": "2024-08-27T15:54:40.241Z"
+          },
+          {
+            "id": 24,
+            "name": "PyTorch",
+            "created_at": "2024-08-27T15:54:40.265Z",
+            "updated_at": "2024-08-27T15:54:40.265Z"
+          },
+          {
+            "id": 29,
+            "name": "cypress",
+            "created_at": "2024-08-27T15:54:40.295Z",
+            "updated_at": "2024-08-27T15:54:40.295Z"
+          },
+          {
+            "id": 47,
+            "name": "Procedural Programming",
+            "created_at": "2024-08-27T15:54:40.383Z",
+            "updated_at": "2024-08-27T15:54:40.383Z"
+          },
+          {
+            "id": 48,
+            "name": "Test-Driven Development (TDD)",
+            "created_at": "2024-08-27T15:54:40.388Z",
+            "updated_at": "2024-08-27T15:54:40.388Z"
+          },
+          {
+            "id": 69,
+            "name": "SVN",
+            "created_at": "2024-08-27T15:54:40.498Z",
+            "updated_at": "2024-08-27T15:54:40.498Z"
+          },
+          {
+            "id": 72,
+            "name": "Azure",
+            "created_at": "2024-08-27T15:54:40.525Z",
+            "updated_at": "2024-08-27T15:54:40.525Z"
+          },
+          {
+            "id": 76,
+            "name": "Docker",
+            "created_at": "2024-08-27T15:54:40.552Z",
+            "updated_at": "2024-08-27T15:54:40.552Z"
+          },
+          {
+            "id": 97,
+            "name": "Penetration Testing",
+            "created_at": "2024-08-27T15:54:40.665Z",
+            "updated_at": "2024-08-27T15:54:40.665Z"
+          },
+          {
+            "id": 99,
+            "name": "Unit Testing",
+            "created_at": "2024-08-27T15:54:40.675Z",
+            "updated_at": "2024-08-27T15:54:40.675Z"
+          },
+          {
+            "id": 100,
+            "name": "Integration Testing",
+            "created_at": "2024-08-27T15:54:40.680Z",
+            "updated_at": "2024-08-27T15:54:40.680Z"
+          },
+          {
+            "id": 101,
+            "name": "End-to-End Testing",
+            "created_at": "2024-08-27T15:54:40.685Z",
+            "updated_at": "2024-08-27T15:54:40.685Z"
+          },
+          {
+            "id": 103,
+            "name": "Load Testing",
+            "created_at": "2024-08-27T15:54:40.697Z",
+            "updated_at": "2024-08-27T15:54:40.697Z"
+          },
+          {
+            "id": 104,
+            "name": "Selenium",
+            "created_at": "2024-08-27T15:54:40.702Z",
+            "updated_at": "2024-08-27T15:54:40.702Z"
+          },
+          {
+            "id": 109,
+            "name": "Trello",
+            "created_at": "2024-08-27T15:54:40.727Z",
+            "updated_at": "2024-08-27T15:54:40.727Z"
+          },
+          {
+            "id": 113,
+            "name": "Continuous Integration",
+            "created_at": "2024-08-27T15:54:40.758Z",
+            "updated_at": "2024-08-27T15:54:40.758Z"
+          }
+        ],
+        "click_count": 0,
+        "last_click": null
+      }
+    },
+    {
+      "id": "2",
+      "type": "link",
+      "attributes": {
+        "original": "another-long-test-link.com",
+        "short": "tur.link/294689da",
+        "user_id": 1,
+        "tags": [],
+        "click_count": 0,
+        "last_click": null
+      }
+    },
+    {
+      "id": "3",
+      "type": "link",
+      "attributes": {
+        "original": "another-long-test-link.com",
+        "short": "tur.link/ae0b0d0a",
+        "user_id": 1,
+        "tags": [],
+        "click_count": 0,
+        "last_click": null
+      }
+    },
+    {
+      "id": "4",
+      "type": "link",
+      "attributes": {
+        "original": "testlink.com",
+        "short": "tur.link/2bd0cae6",
+        "user_id": 1,
+        "tags": [],
+        "click_count": 0,
+        "last_click": null
+      }
+    },
+    {
+      "id": "5",
+      "type": "link",
+      "attributes": {
+        "original": "testlink.com",
+        "short": "tur.link/dfaf67ed",
+        "user_id": 1,
+        "tags": [],
+        "click_count": 0,
+        "last_click": null
+      }
+    }
+  ]
+}
