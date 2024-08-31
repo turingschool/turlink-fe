@@ -1,0 +1,25 @@
+{
+  "data": [
+    {
+        "id": "1",
+        "type": "tag",
+        "attributes": {
+            "name": "javascript"
+        }
+    },
+    {
+        "id": "2",
+        "type": "tag",
+        "attributes": {
+            "name": "react"
+        }
+    },
+    {
+        "id": "3",
+        "type": "tag",
+        "attributes": {
+            "name": "ruby"
+        }
+    }
+  ]
+}

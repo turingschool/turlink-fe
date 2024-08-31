@@ -2,13 +2,13 @@ describe('Landing Page Tests', () => {
   beforeEach(() => {
     cy.visit('http://localhost:3000/')
   })
-    it('should display a navigation bar with a logo, about link and login link', () => {
+    it('should display a navigation bar with a logo and login link', () => {
       cy.get('.navbar').should('be.visible')
       cy.get('.logo').should('be.visible')
       cy.get('.site-name').should('contain', 'TurLink')
-      cy.get('[href="/about"]').should('contain', 'About')
       cy.get('[href="/login"]').should('contain', 'Login')
     })
+
     it('should display a welcome message, a short description of the application, and an image', () => {
       cy.get('.text-section > h1').should('contain', 'Welcome to TurLink')
       cy.get('h3').should('contain', 'A link shortener for the Turing Community')
