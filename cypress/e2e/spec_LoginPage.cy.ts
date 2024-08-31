@@ -35,7 +35,7 @@ describe('Login Page Tests', () => {
         cy.get('.dashboard-header').should('contain', 'Dashboard')
     })
 
-    it('should display the shorten link, dashboard link, and log out link in the navigation bar after the user has logged in', () => {
+    it('should display the shorten link, dashboard link, and logout link in the navigation bar after the user has logged in', () => {
         cy.intercept("POST", "https://turlink-be-53ba7254a7c1.herokuapp.com/api/v1/sessions", {
             statusCode: 201,
             body: {
@@ -102,7 +102,7 @@ describe('Login Page Tests', () => {
         cy.get('.email-input-container > p > .missing-field').should('contain', 'Please enter your email')
     })
     
-    it('should display an error message if the user enters an email but does not password and clicks submit', () => {
+    it('should display an error message if the user enters an email but does not enter a password and clicks submit', () => {
         cy.get('.email-input').type('kim@example.com')
         cy.get('.login-button').click()
         cy.get('.password-input-container > p').should('be.visible')
