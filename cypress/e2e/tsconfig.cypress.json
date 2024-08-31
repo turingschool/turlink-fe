@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
     "extends": "../tsconfig.json",
     "compilerOptions": {
       "types": ["cypress"]
@@ -10,3 +11,14 @@
   }
 
   
+=======
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "types": ["cypress"]
+  },
+  "include": [
+    "cypress/**/*.ts",
+    "cypress/**/*.tsx"
+  ]
+}
+>>>>>>> 90b4d6cb65234c8b7c94c86574694a9bcc5fdb59
