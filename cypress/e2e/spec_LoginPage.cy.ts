@@ -26,6 +26,25 @@ describe('Login Page Tests', () => {
         cy.url().should('include', 'dashboard')
         cy.get('.dashboard-header').should('contain', 'Dashboard')
     })
+
+    it('should display the shorten link, dashboard link, and log out link in the navigation bar after the user has logged in', () => {
+        cy.intercept("POST", "https://turlink-be-53ba7254a7c1.herokuapp.com/api/v1/sessions", {
+            statusCode: 201,
+            body: {
+                data: {
+                    "username": "kim@example.com",
+                    "passsword": "kim123"
+                }
+            }
+        })
+        cy.get('.email-input').type('kim@example.com')
+        cy.get('.password-input').type('kim123')
+        cy.get('.login-button').click()
+        cy.get('[href="/shortenlink"]').should('be.visible')
+        cy.get('[href="/dashboard"]').should('be.visible')
+        cy.get('[href="/my-links"]').should('be.visible')
+    })
+
     it('should display an error message if the user enters an incorrect email but correct password', () => {
         cy.intercept("POST", "https://turlink-be-53ba7254a7c1.herokuapp.com/api/v1/sessions", {
             statusCode: 401,
@@ -42,6 +61,7 @@ describe('Login Page Tests', () => {
         cy.get('.login-button').click()
         cy.get('.login-error-message').should('contain', "We can't find that username and password. Please try again.")
     })
+
     it('should display an error message if the user enters a correct email but an incorrect password', () => {
         cy.intercept("POST", "https://turlink-be-53ba7254a7c1.herokuapp.com/api/v1/sessions", {
             statusCode: 401,
@@ -57,14 +77,15 @@ describe('Login Page Tests', () => {
         cy.get('.password-input').type('kim12')
         cy.get('.login-button').click()
         cy.get('.login-error-message').should('contain', "We can't find that username and password. Please try again.")
-        
     })
+
     it('should display an error message if the user does not enter an email or password and clicks submit', () => {
         cy.get('.login-button').click()
         cy.get('.email-input-container > p').should('be.visible')
         cy.get('.email-input-container > p > .exclamation-mark').should('be.visible')
         cy.get('.email-input-container > p > .missing-field').should('contain', 'Please enter your email')
     })
+    
     it('should display an error message if the user enters an email but does not password and clicks submit', () => {
         cy.get('.email-input').type('kim@example.com')
         cy.get('.login-button').click()
@@ -72,6 +93,7 @@ describe('Login Page Tests', () => {
         cy.get('.exclamation-mark').should('be.visible')
         cy.get('.missing-field').should('contain', 'Please enter your password')
     })
+
     it('should display an error message if the user enters a password but does not enter an email and clicks submit', () => {
         cy.get('.password-input').type('kim123')
         cy.get('.login-button').click()
@@ -79,6 +101,7 @@ describe('Login Page Tests', () => {
         cy.get('.email-input-container > p > .exclamation-mark').should('be.visible')
         cy.get('.email-input-container > p > .missing-field').should('contain', 'Please enter your email')
     })
+
     it('should log a user out when the logout link is clicked', () => {
         cy.intercept("POST", "https://turlink-be-53ba7254a7c1.herokuapp.com/api/v1/sessions", {
             statusCode: 201,
