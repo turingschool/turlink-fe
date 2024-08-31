@@ -30,6 +30,8 @@ TurLink is a React application that shortens links provided by users.
 
 - Fetch API
 
+## Deployed Link
+
 ## Installation Instructions
 
 To run this project locally, follow these steps: 
