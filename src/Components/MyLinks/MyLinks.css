@@ -21,6 +21,8 @@
     gap: 10px;
     border-bottom: 1px solid #eee;
     padding: 10px 0;
+    justify-items: center;
+    align-items: center;
 }
 
 .link-item p {
