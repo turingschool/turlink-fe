@@ -40,7 +40,6 @@ export const fetchTags = async () => {
   }
 
   const data = await response.json();
-  console.log("Fetched tags successfully:", data);
   return data.data.map((tag: any) => ({
     id: tag.id,
     name: tag.attributes.name,
@@ -103,7 +102,6 @@ export const addTagToLink = async (linkId: string, tagId: string) => {
   }
 
   const data = await response.json();
-  console.log("addTagToLink API response:", data); 
 
   return data;
 };
@@ -131,7 +129,6 @@ export const removeTagFromLink = async (linkId: string, tagId: string) => {
 
     
     const data = await response.json();
-    console.log("Tag removed successfully:", data);
     return data;
   } catch (error) {
     console.error("Error removing tag from link:", error);
@@ -141,7 +138,6 @@ export const removeTagFromLink = async (linkId: string, tagId: string) => {
 
 
 export const getTagsForLink = async (linkId: string) => {
-  console.log(`Fetching tags for link with ID: ${linkId}`);
   const response = await fetch(
     `https://turlink-be-53ba7254a7c1.herokuapp.com/api/v1/tags?link=${linkId}`
   );
@@ -156,7 +152,6 @@ export const getTagsForLink = async (linkId: string) => {
   }
 
   const data = await response.json();
-  console.log("Fetched tags successfully:", data);
   return data.data.attributes.tags;
 };
 
@@ -168,7 +163,6 @@ export const getUserLinks = async (userId: string) => {
     throw new Error("Failed to fetch user links");
   }
   const data = await response.json();
-  console.log("API Response:", data);
 
   if (
     data.data &&
