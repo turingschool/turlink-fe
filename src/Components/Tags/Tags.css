@@ -59,29 +59,25 @@
 }
 
 .tag-item.selected {
-  background-color: #82E1E6;
-  color: #3C4040;
-  border-color: #82E1E6;
+  background-color: #cce7ff;
 }
 
-.tag-item:hover {
-  background-color: #e0f7fa;
-  border-color: #82E1E6;
-}
-
-.delete-tag-button {
-  background-color: transparent;
-  border: none;
-  color: #ff4d4d;
+.tag-item span {
+  flex: 1;
   cursor: pointer;
-  font-size: 0.9em;
-  margin-left: 10px;
 }
-
-.delete-tag-button:hover {
+.remove-tag-button {
+  background: black;
+  border: none;
   color: #ff0000;
+  font-size: 12px;
+  cursor: pointer;
+  margin-left: 8px;
 }
 
+.remove-tag-button:hover {
+  color: #d11a2a;
+}
 .error-message {
   color: #ff4d4d;
   background-color: #ffe5e5;

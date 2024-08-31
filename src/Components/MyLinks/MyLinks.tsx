@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { getUserLinks, getTagsForLink } from '../apiCalls/apiCalls';
+import { getUserLinks, getTagsForLink, addTagToLink, removeTagFromLink } from '../apiCalls/apiCalls';
 import Tags from '../Tags/Tags';
 import './MyLinks.css';
 import { Link } from '../../utils/types';
@@ -18,10 +18,29 @@ const MyLinks: React.FC = () => {
     }
   }, [userId]);
 
+
   const fetchUserLinks = async (userId: string) => {
     try {
       const links = await getUserLinks(userId);
-      setLinks(links); 
+      const linksWithTags = await Promise.all(
+        links.map(async (link: Link) => {
+          try {
+            const response = await getTagsForLink(link.id.toString());
+            const tags = response || [];
+
+            const formattedTags = tags.map((tag: any) => ({
+              id: tag.id.toString(),
+              name: tag.name,
+            }));
+            return { ...link, tags: formattedTags };
+          } catch (error) {
+            console.error(`Error fetching tags for link ${link.id}:`, error);
+            return { ...link, tags: [] };
+          }
+        })
+      );
+
+      setLinks(linksWithTags);
       setErrorMessage(null);
     } catch (error) {
       console.error('Error fetching user links:', error);
@@ -29,15 +48,9 @@ const MyLinks: React.FC = () => {
     }
   };
 
-  const openTagsPopup = async (link: Link) => {
+  const openTagsPopup = (link: Link) => {
     setSelectedLink(link);
-    try {
-      const tags = await getTagsForLink(link.id.toString());
-      setTagsForLink(tags);
-      setErrorMessage(null);
-    } catch (error) {
-      setErrorMessage('Error fetching tags for link. Please try again later.');
-    }
+    setTagsForLink(link.tags || []);
     setIsPopupOpen(true);
   };
 
@@ -46,15 +59,36 @@ const MyLinks: React.FC = () => {
     setSelectedLink(null);
   };
 
-  const handleTagUpdate = async (updatedTags: { id: string; name: string }[]) => {
+  const handleTagUpdate = (updatedTags: { id: string; name: string }[]) => {
     setTagsForLink(updatedTags);
     if (selectedLink) {
-      try {
-        await fetchUserLinks(userId);
-        setErrorMessage(null);
-      } catch (error) {
-        setErrorMessage('Error updating links. Please try again later.');
-      }
+      setLinks((prevLinks) =>
+        prevLinks.map((link) =>
+          link.id === selectedLink.id ? { ...link, tags: updatedTags } : link
+        )
+      );
+    }
+  };
+
+  const onAddTag = async (linkId: string, tagId: string) => {
+    try {
+      const response = await addTagToLink(linkId, tagId);
+      const tags = response.data.attributes.tags || [];
+      handleTagUpdate(tags.map((tag: any) => ({ id: tag.id.toString(), name: tag.name })));
+    } catch (error) {
+      console.error('Error adding tag to link:', error);
+      setErrorMessage('Error adding tag. Please try again later.');
+    }
+  };
+
+  const onRemoveTag = async (linkId: string, tagId: string) => {
+    try {
+      const response = await removeTagFromLink(linkId, tagId);
+      const tags = response.data.attributes.tags || [];
+      handleTagUpdate(tags.map((tag: any) => ({ id: tag.id.toString(), name: tag.name })));
+    } catch (error) {
+      console.error('Error removing tag from link:', error);
+      setErrorMessage('Error removing tag. Please try again later.');
     }
   };
 
@@ -71,17 +105,30 @@ const MyLinks: React.FC = () => {
             <p>
               Short: <a href={link.short} target="_blank" rel="noopener noreferrer">{link.short}</a>
             </p>
+            <div className="tags">
+              {link.tags && link.tags.length > 0 ? (
+                link.tags.map((tag) => (
+                  <span key={tag.id} className="tag">
+                    {tag.name}
+                  </span>
+                ))
+              ) : (
+                <span className="no-tags">No tags</span>
+              )}
+            </div>
             <button onClick={() => openTagsPopup(link)}>Manage Tags</button>
           </div>
         ))
       )}
-
+  
       {isPopupOpen && selectedLink && (
         <Tags
           linkId={selectedLink.id.toString()}
           currentTags={tagsForLink}
           onClose={closeTagsPopup}
           onUpdateTags={handleTagUpdate}
+          onAddTag={onAddTag}
+          onRemoveTag={onRemoveTag}
         />
       )}
     </div>

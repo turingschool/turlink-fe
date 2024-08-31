@@ -19,7 +19,6 @@ const ProtectedRoute = ({ element }: { element: JSX.Element }) => {
 
 function App() {
   const [userLinks, setUserLinks] = useState<Link[]>([]);
-
   const handleNewLink = (newLink: Link) => {
     setUserLinks((prevLinks) => [...prevLinks, newLink]);
   };
@@ -32,7 +31,12 @@ function App() {
           <Route path="/" element={<LandingPage />} />
           <Route path="/login" element={<Login />} />
           <Route path="/about" element={<About />} />
-          <Route path="/shortenlink" element={<ProtectedRoute element={<ShortenLinkPage onNewLink={handleNewLink} />} />} />
+          <Route
+            path="/shortenlink"
+            element={
+              <ProtectedRoute element={<ShortenLinkPage onNewLink={handleNewLink} />} />
+            }
+          />
           <Route path="/dashboard" element={<ProtectedRoute element={<Dashboard />} />} />
           <Route path="/my-links" element={<ProtectedRoute element={<MyLinks />} />} />
           <Route path="*" element={<Navigate to="/" />} />
