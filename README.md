@@ -1,46 +1,83 @@
-# Getting Started with Create React App
+# TurLink
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+TurLink is a React application that shortens links provided by users. 
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+- Shorten link functionality, user dashboard, and popular links page are only available after the user has successfully logged into the application. 
 
-### `npm start`
+- Shortened links are visible to a user on their my links page.  
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- User can categorize links using a set of 171 unique tags. 
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- Top five shortened links for all users by click count are available on the dashboard page. 
 
-### `npm test`
+- Links can be filtered by tag on the my links and dashboard pages. 
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Technologies Used
 
-### `npm run build`
+- React
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- React Router
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- JavaScript
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- Cypress
 
-### `npm run eject`
+- HTML
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+- CSS
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- Fetch API
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## Installation Instructions
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+To run this project locally, follow these steps: 
+  - `git clone https://github.com/turingschool/turlink-fe`
+  - `cd` into the directory
+  - Install dependencies using `npm install`
+  - Start the development server by running `npm start`
+  - Enjoy shortening and organizing links!
 
-## Learn More
+### Cypress Testing (application must be running)
+  - Install dependencies by running npm install cypress --save-dev
+  - Run npx cypress open
+  - Click E2E testing
+  - Click Start E2E Testing and select Chrome 
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Challenges
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- This was our first project working with a team of backend developers
+
+- Working with mock data with the API was being built by out backend development team
+
+- Ensuring responsiveness across all devices at various breakpoints throughout the application
+
+## Wins 
+
+- A robust and thorough project plan that outlined each team member's responsibilities 
+
+- Clear communication with our backend developers allowed for seamless API integration
+
+- Graceful error handling
+
+- Developing an application that solves a real-world problem for Turing students, instructors, and alumni. 
+
+- Collaboration: it was fun to create an application as a fullstack team. 
+
+## Screenshots 
+
+
+## Contributors
+- David Swatzell 
+- Kim Ewing
+- Reese Green
+- Zach Wolek 
+
+## Acknowledgements
+
+- [Turing](https://turing.edu/) for education.
+
+- [React.dev](https://react.dev/) for React documentation.
+
+- [Cypress Docs](https://docs.cypress.io/) for Cypress training and documentation.
