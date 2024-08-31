@@ -27,7 +27,6 @@ const Tags: React.FC<TagsProps> = ({ linkId, currentTags, onClose, onUpdateTags,
         setAvailableTags(tagsData);
         setErrorMessage(null);
       } catch (error) {
-        console.error('Failed to fetch tags:', error);
         setErrorMessage('Failed to fetch tags. Please try again later.');
       }
     };

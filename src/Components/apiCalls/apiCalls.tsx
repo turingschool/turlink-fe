@@ -19,7 +19,7 @@ export const getShortLink = async (userId: string, linkInput: string) => {
   return data;
 };
 export const fetchTags = async () => {
-  console.log("Fetching all tags from the database");
+
   const response = await fetch(
     "https://turlink-be-53ba7254a7c1.herokuapp.com/api/v1/tags",
     {
@@ -107,9 +107,6 @@ export const addTagToLink = async (linkId: string, tagId: string) => {
 };
 
 export const removeTagFromLink = async (linkId: string, tagId: string) => {
-  console.log(
-    `Attempting to remove tag with ID: ${tagId} from link with ID: ${linkId}`
-  );
   try {
     const response = await fetch(
       `https://turlink-be-53ba7254a7c1.herokuapp.com/api/v1/tags/${tagId}?link=${linkId}`,
