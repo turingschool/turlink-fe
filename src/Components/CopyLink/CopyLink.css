@@ -12,10 +12,11 @@
 
 .shortened-link-container {
     display: flex; 
-    align-items: center;
-    justify-content: flex-start; 
-    width: 300px; 
-    margin-bottom: 20px; 
+    flex-direction: row; 
+    align-items: center; 
+    justify-content: flex-start;
+    width: 300px;
+    margin-bottom: 10px; 
 }
 
 .shortened-link-input {
@@ -54,6 +55,12 @@
     word-wrap: break-word; 
 }
 
+.shortened-link-wrapper {
+    display: flex;
+    flex-direction: column; 
+    align-items: center;
+}
+
 .original-link-label {
     margin-bottom: 0;
     font-size: 16px;
@@ -82,4 +89,10 @@
     font-size: 0.75em;
     border-radius: 4px;
     border: none;
+}
+
+.copy-message-body {
+    margin-top: 10px; 
+    font-size: 14px;
+    text-align: center; 
 }
