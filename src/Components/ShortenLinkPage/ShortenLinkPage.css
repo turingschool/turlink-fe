@@ -3,9 +3,7 @@
     color: #3C4040;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    background-color: #ffffff;
-    min-height: 100vh;
+    min-height: 100vh; 
     justify-content: flex-start;
 }
 
