@@ -3,10 +3,7 @@
     color: #3C4040;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    padding: 0;
-    background-color: #ffffff;
-    height: 100vh;
+    min-height: 100vh; 
     justify-content: flex-start;
 }
 
@@ -20,8 +17,6 @@
     flex-direction: column;
     padding-top: 2em;
     padding-left: 3em;
-    box-sizing: border-box;
-    margin: 0;
     margin-bottom: 5em;
 }
 

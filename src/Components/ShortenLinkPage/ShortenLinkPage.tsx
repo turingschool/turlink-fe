@@ -16,6 +16,7 @@ const ShortenLinkPage: React.FC<ShortenLinkPageProps> = ({ onNewLink }) => {
   const [userId, setUserId] = useState<string>(initialUserId);
   const [originalLink, setOriginalLink] = useState<string>('');
   const [shortenedLink, setShortenedLink] = useState<string>('');
+  const [errorMessage, setErrorMessage] = useState<string>('');
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -42,11 +43,10 @@ const ShortenLinkPage: React.FC<ShortenLinkPageProps> = ({ onNewLink }) => {
 
         setOriginalLink(newLink.original);
         setShortenedLink(newLink.short);
-
-    
+        setErrorMessage('')
         onNewLink(newLink);
-      } catch (error) {
-        console.error("Error shortening link:", error);
+      } catch (error: any) {
+        setErrorMessage(`Error: ${error.message}`);
       }
     } else {
       navigate('/login');
@@ -58,7 +58,7 @@ const ShortenLinkPage: React.FC<ShortenLinkPageProps> = ({ onNewLink }) => {
       <div className="shorten-link-header">
         <p className="shorten-link-header-text">Shorten Your Link</p>
       </div>
-      <InputField submitOriginalLink={submitOriginalLink} />
+      <InputField submitOriginalLink={submitOriginalLink} errorMessage={errorMessage}/>
       <CopyLink shortenedLink={shortenedLink} originalLink={originalLink} />
     </section>
   );
