@@ -10,14 +10,18 @@ export const getShortLink = async (userId: string, linkInput: string) => {
       },
     }
   );
-
   if (!response.ok) {
-    throw new Error("Failed to shorten link");
+    let errorData = await response.json()
+    let errorMessage = "Failed to shorten link"; 
+    if (errorData.errors && errorData.errors.length > 0){
+      errorMessage = errorData.errors[0].message
+    }
+    throw new Error(errorMessage);
   }
-
   const data = await response.json();
   return data;
 };
+
 export const fetchTags = async () => {
 
   const response = await fetch(
