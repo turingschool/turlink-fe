@@ -89,7 +89,6 @@ export const getTags = async () => {
   return data.data;
 };
 
-
 export const addTagToLink = async (linkId: string, tagId: string) => {
   const response = await fetch(
     `https://turlink-be-53ba7254a7c1.herokuapp.com/api/v1/tags?link=${linkId}&tag=${tagId}`,
@@ -182,7 +181,7 @@ export const getUserLinks = async (userId: string) => {
   }
 };
 
-export const incrementClickCount = (shortenedLink: string) => {
+export const incrementClickCountAndVisitUrl = (shortenedLink: string) => {
   return fetch(`https://turlink-be-53ba7254a7c1.herokuapp.com/api/v1/links?short=${shortenedLink}`)
     .then(response => {
       if (!response.ok) {
@@ -190,6 +189,5 @@ export const incrementClickCount = (shortenedLink: string) => {
       }
       return response.json()
     })
-    .then(data => window.open(data.data.attributes.original))
     .catch(error => console.log(error))
 }
