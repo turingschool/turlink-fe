@@ -19,8 +19,6 @@ const Dashboard: React.FC = () => {
     const [selectedTag, setSelectedTag] = useState<string>("");
     const [error, setError] = useState<string>("");
 
-    console.log("links:", links)
-
     useEffect(() => {
         fetchTopLinks()
             .then((fetchedLinks) => {
