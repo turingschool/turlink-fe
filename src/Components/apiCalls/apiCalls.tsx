@@ -12,8 +12,8 @@ export const getShortLink = async (userId: string, linkInput: string) => {
   );
   if (!response.ok) {
     let errorData = await response.json()
-    let errorMessage = "Failed to shorten link"; 
-    if (errorData.errors && errorData.errors.length > 0){
+    let errorMessage = "Failed to shorten link";
+    if (errorData.errors && errorData.errors.length > 0) {
       errorMessage = errorData.errors[0].message
     }
     throw new Error(errorMessage);
@@ -119,7 +119,7 @@ export const removeTagFromLink = async (linkId: string, tagId: string) => {
       }
     );
 
-    
+
     if (!response.ok) {
       const errorText = await response.text();
       console.error(
@@ -128,7 +128,7 @@ export const removeTagFromLink = async (linkId: string, tagId: string) => {
       throw new Error(`Failed to remove tag: ${response.statusText}`);
     }
 
-    
+
     const data = await response.json();
     return data;
   } catch (error) {
@@ -181,3 +181,14 @@ export const getUserLinks = async (userId: string) => {
     throw new Error("Unexpected data structure");
   }
 };
+
+export const incrementClickCount = (shortenedLink: string) => {
+  return fetch(`https://turlink-be-53ba7254a7c1.herokuapp.com/api/v1/links?short=${shortenedLink}`)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error("Unable to increment click count for this link")
+      }
+      return response.json()
+    })
+    .then(data => console.log("data:", data))
+}
