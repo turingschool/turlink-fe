@@ -55,6 +55,10 @@ const Dashboard: React.FC = () => {
             });
     };
 
+    const handleClick = () => {
+        console.log("hello")
+    }
+
     return (
         <div className="dashboard-container">
             <section className="dashboard-header">

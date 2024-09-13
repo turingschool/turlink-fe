@@ -22,6 +22,14 @@ describe('Dashboard Page Tests', () => {
             statusCode: 200,
             fixture: 'topfivelinksbytag'
         })
+        cy.intercept('GET', 'https://turlink-be-53ba7254a7c1.herokuapp.com/api/v1/top_links?tag=react', {
+            statusCode: 200,
+            body: {
+                data: {
+                    
+                }
+            }
+        })
         cy.get('.email-input').type('kim@example.com')
         cy.get('.password-input').type('kim123')
         cy.get('.login-button').click()
