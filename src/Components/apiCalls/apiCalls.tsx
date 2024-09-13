@@ -186,9 +186,10 @@ export const incrementClickCount = (shortenedLink: string) => {
   return fetch(`https://turlink-be-53ba7254a7c1.herokuapp.com/api/v1/links?short=${shortenedLink}`)
     .then(response => {
       if (!response.ok) {
-        throw new Error("Unable to increment click count for this link")
+        throw new Error("Unable to increment the click count or visit this link")
       }
       return response.json()
     })
+    .then(data => window.open(data.data.attributes.original))
     .catch(error => console.log(error))
 }
