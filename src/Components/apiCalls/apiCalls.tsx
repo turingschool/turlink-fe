@@ -190,5 +190,5 @@ export const incrementClickCount = (shortenedLink: string) => {
       }
       return response.json()
     })
-    .then(data => console.log("data:", data))
+    .catch(error => console.log(error))
 }
