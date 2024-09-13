@@ -1,6 +1,6 @@
-import React, {useState, useEffect} from "react";
 import './Dashboard.css';
-import { fetchTags, fetchTopLinks } from "../apiCalls/apiCalls";
+import { useState, useEffect } from "react";
+import { fetchTags, fetchTopLinks, incrementClickCount } from "../apiCalls/apiCalls";
 
 interface Link {
     name: string;
@@ -55,6 +55,10 @@ const Dashboard: React.FC = () => {
             });
     };
 
+    const handleClick = (shortenedLink:string) => {
+        incrementClickCount(shortenedLink)
+    }
+
     return (
         <div className="dashboard-container">
             <section className="dashboard-header">
@@ -73,7 +77,7 @@ const Dashboard: React.FC = () => {
                         {links.map((link, index) => (
                             <div key={index} className="table-row">
                                 <div className="table-item link-name">
-                                    <a href={link.name}>{link.name}</a>
+                                    <a onClick={() => handleClick(link.name)} href={link.name}>{link.name}</a>
                                 </div>
                                 <div className="table-item click-count">{link.clickCount}</div>
                                 <div className="table-item tags">
