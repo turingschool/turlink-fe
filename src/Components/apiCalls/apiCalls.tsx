@@ -63,19 +63,19 @@ export function fetchTopLinks(tag?: string) {
       return response.json();
     })
     .then((data) => {
-      if (data.data.length === 0) {
-        throw new Error("No links found for the selected tag");
-      }
+      // if (data.data.length === 0) {
+      //   throw new Error("No links found for the selected tag, please select another filter");
+      // }
       return data.data.map((link: any) => ({
         name: link.attributes.short,
         clickCount: link.attributes.click_count,
         tags: link.attributes.tags.map((tag: any) => tag.name),
       }));
     })
-    .catch((error) => {
-      console.error("Error fetching top links:", error);
-      return [];
-    });
+    // .catch((error) => {
+    //   console.error("Error fetching top links:", error);
+    //   return [];
+    // });
 }
 
 export const getTags = async () => {
