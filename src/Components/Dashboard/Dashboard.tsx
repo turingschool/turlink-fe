@@ -63,7 +63,7 @@ const Dashboard: React.FC = () => {
         event.preventDefault()
         incrementClickCountAndVisitUrl(shortenedLink)
             .then(data => {
-                const originalURL = data.data.attributes.original
+                const originalURL:string = data.data.attributes.original
                 window.open(originalURL)
                 window.location.reload()
             })       
