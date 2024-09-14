@@ -1,6 +1,6 @@
 import './Dashboard.css';
 import { useState, useEffect } from "react";
-import { fetchTags, fetchTopLinks, incrementClickCount } from "../apiCalls/apiCalls";
+import { fetchTags, fetchTopLinks, incrementClickCountAndVisitUrl } from "../apiCalls/apiCalls";
 
 interface Link {
     name: string;
@@ -18,8 +18,6 @@ const Dashboard: React.FC = () => {
     const [tags, setTags] = useState<Tag[]>([]);
     const [selectedTag, setSelectedTag] = useState<string>("");
     const [error, setError] = useState<string>("");
-    const [data, setData] = useState<string>("")
-    console.log("data:", data)
 
     useEffect(() => {
         fetchTopLinks()
@@ -57,13 +55,13 @@ const Dashboard: React.FC = () => {
             });
     };
 
-    const handleClick = (shortenedLink:string, event) => {
+    const handleClick = (shortenedLink:string, event:React.MouseEvent<HTMLAnchorElement>) => {
         event.preventDefault()
         incrementClickCountAndVisitUrl(shortenedLink)
         .then(data => {
             const originalURL = data.data.attributes.original
             window.open(originalURL)
-        })
+        })       
     }
 
     return (
@@ -84,7 +82,7 @@ const Dashboard: React.FC = () => {
                         {links.map((link, index) => (
                             <div key={index} className="table-row">
                                 <div className="table-item link-name">
-                                    <a onClick={() => handleClick(link.name, event)} href={link.name}>{link.name}</a>
+                                    <a onClick={(event:React.MouseEvent<HTMLAnchorElement>) => handleClick(link.name, event)} href={link.name}>{link.name}</a>
                                 </div>
                                 <div className="table-item click-count">{link.clickCount}</div>
                                 <div className="table-item tags">
