@@ -40,7 +40,7 @@ describe('Dashboard Page Tests', () => {
         cy.get('.login-button').click()
         cy.get('.error-message').should('contain', 'We encountered an unexpected error and were unable to load the top 5 links. Please try again later.')
     })
-    it.only('should display a message to the user if no tags meet the tag filter criteria', () => {
+    it('should display a message to the user if no tags meet the tag filter criteria', () => {
         cy.intercept('GET', 'https://turlink-be-53ba7254a7c1.herokuapp.com/api/v1/top_links', {
             statusCode: 200,
             fixture: 'topfivelinks'
