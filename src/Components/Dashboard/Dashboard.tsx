@@ -65,7 +65,8 @@ const Dashboard: React.FC = () => {
             .then(data => {
                 const originalURL = data.data.attributes.original
                 window.open(originalURL)
-            })
+                window.location.reload()
+            })       
     }
 
     return (
