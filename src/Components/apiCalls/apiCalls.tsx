@@ -46,33 +46,33 @@ export const fetchTags = async () => {
   }));
 };
 
-export function fetchTopLinks(tag?: string) {
-  const url = tag
-    ? `https://turlink-be-53ba7254a7c1.herokuapp.com/api/v1/top_links?tag=${tag}`
-    : "https://turlink-be-53ba7254a7c1.herokuapp.com/api/v1/top_links";
 
-  return fetch(url)
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
-      return response.json();
-    })
-    .then((data) => {
-      if (data.data.length === 0) {
-        throw new Error("No links found for the selected tag");
-      }
-      return data.data.map((link: any) => ({
-        name: link.attributes.short,
-        clickCount: link.attributes.click_count,
-        tags: link.attributes.tags.map((tag: any) => tag.name),
-      }));
-    })
-    .catch((error) => {
-      console.error("Error fetching top links:", error);
-      return [];
-    });
-}
+  export function fetchTopLinks(tags?: string[]) {
+    const query = tags && tags.length > 0 ? `?tag=${encodeURIComponent(tags.join(','))}` : '';
+    const url = `https://turlink-be-53ba7254a7c1.herokuapp.com/api/v1/top_links${query}`;
+  
+    return fetch(url)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        if (data.data.length === 0) {
+          throw new Error("No links found for the selected tags");
+        }
+        return data.data.map((link: any) => ({
+          name: link.attributes.short,
+          clickCount: link.attributes.click_count,
+          tags: link.attributes.tags.map((tag: any) => tag.name),
+        }));
+      })
+      .catch((error) => {
+        console.error("Error fetching top links:", error);
+        return [];
+      });
+  }
 
 export const getTags = async () => {
   const response = await fetch(
