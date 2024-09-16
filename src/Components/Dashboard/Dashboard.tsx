@@ -48,6 +48,11 @@ const Dashboard: React.FC = () => {
         }
     };
 
+    const removeTagFilter = (tagToRemove: string) => {
+        const updatedTags = selectedTags.filter((tag) => tag !== tagToRemove);
+        setSelectedTags(updatedTags);
+    }
+    
     return (
         <div className="dashboard-container">
             <section className="dashboard-header">
