@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from "react";
 import './Dashboard.css';
 import { fetchTags, fetchTopLinks } from "../apiCalls/apiCalls";
+import { set } from "cypress/types/lodash";
 
 interface Link {
     name: string;
@@ -20,16 +21,21 @@ const Dashboard: React.FC = () => {
     const [error, setError] = useState<string>("");
 
     useEffect(() => {
-        fetchTopLinks()
+        const tagsQuery = selectedTags.length > 0 ? selectedTags.join(',') : '';
+        fetchTopLinks(tagsQuery)
             .then((fetchedLinks) => {
                 if (fetchedLinks.length === 0) {
-                    setError("No links found.");
+                    setLinks([]);
+                    setError("No links found for the selected tags, please select another filter.");
                 } else {
                     setLinks(fetchedLinks);
+                    setError("");
                 }
             })
-            .catch((err) => setError("Failed to load top links."));
-    }, []);
+            .catch((err) => {
+                setLinks([]);
+                setError("Failed to load top links.");
+    });}, [selectedTags]);
 
     useEffect(() => {
         fetchTags().then((fetchedTags) => setTags(fetchedTags))
