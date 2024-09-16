@@ -39,6 +39,28 @@ const Dashboard: React.FC = () => {
         fetchTags().then((fetchedTags) => setTags(fetchedTags));
     }, []);
 
-    
+    const handleTagChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+        const selectedTag = event.target.value;
+        setError("");
+        if (!selectedTags.includes(selectedTag) && selectedTag !== "") {
+            setSelectedTags([...selectedTags, selectedTag]);
+        }
+    };
+
+    const removeTag = (tagToRemove: string) => {
+        const updatedTags = selectedTags.filter(tag => tag !== tagToRemove);
+        setSelectedTags(updatedTags);
+    };
+
+    const handleClick = (shortenedLink: string, event: React.MouseEvent<HTMLAnchorElement>) => {
+        event.preventDefault();
+        incrementClickCountAndVisitUrl(shortenedLink)
+            .then(data => {
+                const originalURL: string = data.data.attributes.original;
+                window.open(originalURL);
+                window.location.reload();
+            });
+    };
+
 
     export default Dashboard;
