@@ -61,7 +61,6 @@ const Login = (): React.JSX.Element => {
             return response.json();
         })
         .then(data => {
-            console.log(data)
             const userId = data.data.id;
             setLogin(userId); 
             setIsError(false);

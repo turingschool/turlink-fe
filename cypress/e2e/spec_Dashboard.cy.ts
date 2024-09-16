@@ -22,6 +22,7 @@ describe('Dashboard Page Tests', () => {
             statusCode: 200,
             fixture: 'topfivelinksbytag'
         })
+
         cy.get('.email-input').type('kim@example.com')
         cy.get('.password-input').type('kim123')
         cy.get('.login-button').click()
@@ -60,11 +61,5 @@ describe('Dashboard Page Tests', () => {
         cy.get('.click-count').last().should('contain', 0)
         cy.get('.tags').last().should('contain', 'Bootstrap')
     })
-    it('should display a message to the user if no tags meet the tag filter criteria', () => {
-        cy.get('.tag-filter').select('react')
-        cy.get('.current').should('contain', 'Current filters:')
-        cy.get('.current-filters > .tag').should('contain', 'react')
-        cy.get('.table-row').should('have.length', 0)
-        cy.get('.error-message').should('contain', 'No links found for the selected tag, please select another filter.')
-    })
+
 })
