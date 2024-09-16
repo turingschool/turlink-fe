@@ -16,7 +16,7 @@ interface Tag {
 const Dashboard: React.FC = () => {
     const [links, setLinks] = useState<Link[]>([]);
     const [tags, setTags] = useState<Tag[]>([]);
-    const [selectedTag, setSelectedTag] = useState<string>("");
+    const [selectedTags, setSelectedTags] = useState<string[]>([]);
     const [error, setError] = useState<string>("");
 
     useEffect(() => {
