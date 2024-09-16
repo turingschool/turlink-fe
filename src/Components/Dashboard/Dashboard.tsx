@@ -62,5 +62,68 @@ const Dashboard: React.FC = () => {
             });
     };
 
+    return (
+        <div className="dashboard-container">
+            <section className="dashboard-header">
+                <h1>Dashboard</h1>
+            </section>
+            <section className="popular-links">
+                <h2>Popular Links</h2>
+                {error && <p className="error-message">{error}</p>}
+                {!error && (
+                    <div className="links-table">
+                        <div className="table-header">
+                            <div className="header-item"></div>
+                            <div className="header-item">Click Count</div>
+                            <div className="header-item">Tags</div>
+                        </div>
+                        {links.map((link, index) => (
+                            <div key={index} className="table-row">
+                                <div className="table-item link-name">
+                                    <a onClick={(event: React.MouseEvent<HTMLAnchorElement>) => handleClick(link.name, event)} href={link.name}>{link.name}</a>
+                                </div>
+                                <div className="table-item click-count">{link.clickCount}</div>
+                                <div className="table-item tags">
+                                    {link.tags.length > 0 ? (
+                                        link.tags.map((tag, idx) => (
+                                            <span key={idx} className="tag">{tag}</span>
+                                        ))
+                                    ) : (
+                                        <span className="no-tag">No tags assigned for this link</span>
+                                    )}
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                )}
+            </section>
+
+            <section className="filter-by-tag">
+                <h2>Filter by Tag</h2>
+                <select className="tag-filter" onChange={handleTagChange}>
+                    <option value="">Select a tag</option>
+                    {tags.map((tag) => (
+                        <option key={tag.id} value={tag.name}>
+                            {tag.name}
+                        </option>
+                    ))}
+                </select>
+                <div className="current-filters">
+                    <p className="current">Current filters:</p>
+                    {selectedTags.length > 0 ? (
+                        selectedTags.map((tag, idx) => (
+                            <span key={idx} className="tag">
+                                {tag} <button onClick={() => removeTag(tag)}>x</button>
+                            </span>
+                        ))
+                    ) : (
+                        <span className="no-filter">No filter applied yet, select one from the dropdown to see the top links for that tag.</span>
+                    )}
+                </div>
+            </section>
+        </div>
+    );
+};
+
 
     export default Dashboard;
