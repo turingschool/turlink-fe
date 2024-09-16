@@ -85,7 +85,7 @@
     padding: 4em;
     text-align: left;
     margin-top: 1em; 
-    flex-grow: 1;
+    flex-grow: 0;
 }
 
 .filter-by-tag h2 {
@@ -120,6 +120,7 @@ footer {
 .tags {
     display: flex;
     flex-wrap: wrap;
+    min-width: 200px;
 }
 
 .tag {
