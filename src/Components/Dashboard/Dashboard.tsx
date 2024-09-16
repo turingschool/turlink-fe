@@ -1,6 +1,6 @@
 import './Dashboard.css';
 import { useState, useEffect } from "react";
-import { fetchTags, fetchTopLinks, incrementClickCount } from "../apiCalls/apiCalls";
+import { fetchTags, fetchTopLinks, incrementClickCountAndVisitUrl } from "../apiCalls/apiCalls";
 
 interface Link {
     name: string;
@@ -23,12 +23,15 @@ const Dashboard: React.FC = () => {
         fetchTopLinks()
             .then((fetchedLinks) => {
                 if (fetchedLinks.length === 0) {
-                    setError("No links found.");
+                    setError("No links were found.");
                 } else {
                     setLinks(fetchedLinks);
                 }
             })
-            .catch((err) => setError("Failed to load top links."));
+            .catch((error) => {
+                console.error(error)
+                setError("We encountered an unexpected error and were unable to load the top 5 links. Please try again later.");
+            })
     }, []);
 
     useEffect(() => {
@@ -49,14 +52,21 @@ const Dashboard: React.FC = () => {
                     setLinks(fetchedLinks);
                 }
             })
-            .catch((err) => {
+            .catch((error) => {
                 setLinks([]);
-                setError("Error fetching links for the selected tag.");
+                setError("");
+                console.error(error)
             });
     };
 
-    const handleClick = (shortenedLink:string) => {
-        incrementClickCount(shortenedLink)
+    const handleClick = (shortenedLink: string, event: React.MouseEvent<HTMLAnchorElement>) => {
+        event.preventDefault()
+        incrementClickCountAndVisitUrl(shortenedLink)
+            .then(data => {
+                const originalURL:string = data.data.attributes.original
+                window.open(originalURL)
+                window.location.reload()
+            })       
     }
 
     return (
@@ -77,7 +87,7 @@ const Dashboard: React.FC = () => {
                         {links.map((link, index) => (
                             <div key={index} className="table-row">
                                 <div className="table-item link-name">
-                                    <a onClick={() => handleClick(link.name)} href={link.name}>{link.name}</a>
+                                    <a onClick={(event: React.MouseEvent<HTMLAnchorElement>) => handleClick(link.name, event)} href={link.name}>{link.name}</a>
                                 </div>
                                 <div className="table-item click-count">{link.clickCount}</div>
                                 <div className="table-item tags">

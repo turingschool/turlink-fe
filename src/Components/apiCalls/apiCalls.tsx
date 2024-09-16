@@ -63,19 +63,19 @@ export function fetchTopLinks(tag?: string) {
       return response.json();
     })
     .then((data) => {
-      if (data.data.length === 0) {
-        throw new Error("No links found for the selected tag");
-      }
+      // if (data.data.length === 0) {
+      //   throw new Error("No links found for the selected tag, please select another filter");
+      // }
       return data.data.map((link: any) => ({
         name: link.attributes.short,
         clickCount: link.attributes.click_count,
         tags: link.attributes.tags.map((tag: any) => tag.name),
       }));
     })
-    .catch((error) => {
-      console.error("Error fetching top links:", error);
-      return [];
-    });
+    // .catch((error) => {
+    //   console.error("Error fetching top links:", error);
+    //   return [];
+    // });
 }
 
 export const getTags = async () => {
@@ -88,7 +88,6 @@ export const getTags = async () => {
   const data = await response.json();
   return data.data;
 };
-
 
 export const addTagToLink = async (linkId: string, tagId: string) => {
   const response = await fetch(
@@ -182,11 +181,11 @@ export const getUserLinks = async (userId: string) => {
   }
 };
 
-export const incrementClickCount = (shortenedLink: string) => {
+export const incrementClickCountAndVisitUrl = (shortenedLink: string) => {
   return fetch(`https://turlink-be-53ba7254a7c1.herokuapp.com/api/v1/links?short=${shortenedLink}`)
     .then(response => {
       if (!response.ok) {
-        throw new Error("Unable to increment click count for this link")
+        throw new Error("Unable to increment the click count or visit this link")
       }
       return response.json()
     })
