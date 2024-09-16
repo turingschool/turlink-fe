@@ -52,7 +52,7 @@ const Dashboard: React.FC = () => {
         const updatedTags = selectedTags.filter((tag) => tag !== tagToRemove);
         setSelectedTags(updatedTags);
     }
-    
+
     return (
         <div className="dashboard-container">
             <section className="dashboard-header">
@@ -91,7 +91,7 @@ const Dashboard: React.FC = () => {
 
             <section className="filter-by-tag">
                 <h2>Filter by Tag</h2>
-                <select className="tag-filter" value={selectedTag} onChange={handleTagChange}>
+                <select className="tag-filter" onChange={handleTagChange}>
                     <option value="">Select a tag</option>
                     {tags.map((tag) => (
                         <option key={tag.id} value={tag.name}>
@@ -101,8 +101,15 @@ const Dashboard: React.FC = () => {
                 </select>
                 <div className="current-filters">
                     <p className="current">Current filters:</p>
-                    {selectedTag ? (
-                        <span className="tag">{selectedTag}</span>
+                    {selectedTags.length > 0 ? (
+                        selectedTags.map((tag, index) => (
+                        <span key={index} className="tag-filter-item">
+                        {tag}
+                        <button 
+                        className="remove-tag-button" onClick={() => removeTagFilter(tag)}>x</button>
+                        
+                        </span>
+                        ))
                     ) : (
                         <span className="no-filter">No filter applied yet, select one from the dropdown to see the top 5 links for that tag.</span>
                     )}
