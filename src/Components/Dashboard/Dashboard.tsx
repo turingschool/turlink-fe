@@ -43,22 +43,9 @@ const Dashboard: React.FC = () => {
 
     const handleTagChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         const selectedTag = event.target.value;
-        setSelectedTag(selectedTag);
-        setError("");
-
-        fetchTopLinks(selectedTag)
-            .then((fetchedLinks) => {
-                if (fetchedLinks.length === 0) {
-                    setLinks([]);
-                    setError("No links found for the selected tag, please select another filter.");
-                } else {
-                    setLinks(fetchedLinks);
-                }
-            })
-            .catch((err) => {
-                setLinks([]);
-                setError("Error fetching links for the selected tag.");
-            });
+        if (selectedTag && !selectedTags.includes(selectedTag)) {
+       setSelectedTags([...selectedTags, selectedTag]);
+        }
     };
 
     return (
