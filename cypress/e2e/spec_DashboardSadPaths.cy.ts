@@ -38,7 +38,7 @@ describe('Dashboard Page Tests', () => {
             fixture: 'tags'
         })
         cy.get('.login-button').click()
-        cy.get('.error-message').should('contain', 'We encountered an unexpected error and were unable to load the top 5 links. Please try again later.')
+        cy.get('.error-message').should('contain', 'No links were found.')
     })
     it('should display a message to the user if no tags meet the tag filter criteria', () => {
         cy.intercept('GET', 'https://turlink-be-53ba7254a7c1.herokuapp.com/api/v1/top_links', {
@@ -62,6 +62,6 @@ describe('Dashboard Page Tests', () => {
         cy.get('.current').should('contain', 'Current filters:')
         cy.get('.current-filters > .tag').should('contain', 'react')
         cy.get('.table-row').should('have.length', 0)
-        cy.get('.error-message').should('contain', 'No links found for the selected tag, please select another filter.')
+        cy.get('.error-message').should('contain', 'No links were found.')
     })
 })
