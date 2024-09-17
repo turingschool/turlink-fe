@@ -18,6 +18,7 @@ const Dashboard: React.FC = () => {
     const [tags, setTags] = useState<Tag[]>([]);
     const [selectedTags, setSelectedTags] = useState<string[]>([]);
     const [error, setError] = useState<string>("");
+    const [selectedTagValue, setSelectedTagValue] = useState<string>("");
 
     useEffect(() => {
         fetchTopLinks(selectedTags.length > 0 ? selectedTags : undefined)
@@ -45,6 +46,7 @@ const Dashboard: React.FC = () => {
         if (!selectedTags.includes(selectedTag) && selectedTag !== "") {
             setSelectedTags([...selectedTags, selectedTag]);
         }
+        setSelectedTagValue("");
     };
 
     const removeTag = (tagToRemove: string) => {
@@ -100,7 +102,8 @@ const Dashboard: React.FC = () => {
 
             <section className="filter-by-tag">
                 <h2>Filter by Tag</h2>
-                <select className="tag-filter" onChange={handleTagChange}>
+                <select className="tag-filter" onChange={handleTagChange}
+                value={selectedTagValue}>
                     <option value="">Select a tag</option>
                     {tags.map((tag) => (
                         <option key={tag.id} value={tag.name}>
