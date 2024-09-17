@@ -6,10 +6,10 @@ describe('Login Page Tests', () => {
             body: {
                 data: {
                     "username": "kim@example.com",
-                    "passsword": "kim123"
+                    "password": "kim123"
                 }
             }
-        })
+        }).as('loginRequest')
         cy.intercept('GET', 'https://turlink-be-53ba7254a7c1.herokuapp.com/api/v1/top_links', {
             statusCode: 200,
             fixture: 'topfivelinks'
@@ -21,14 +21,15 @@ describe('Login Page Tests', () => {
         cy.intercept("POST", "https://turlink-be-53ba7254a7c1.herokuapp.com/api/v1/users/undefined/links?link=www.example.com%2FCypressExample", {
             statusCode: 200,
             fixture: 'shortenlink.json'  
-          })
+          }).as('shortenLinkRequest')
         cy.intercept("POST", "https://turlink-be-53ba7254a7c1.herokuapp.com/api/v1/users/undefined/links?link=www.example.com%2FCypressSecondExample", {
             statusCode: 200,
             fixture: 'shortenlink2.json'  
-          })
+          }).as('shortenSecondLinkRequest')
         cy.get('.email-input').type('kim@example.com')
         cy.get('.password-input').type('kim123')
         cy.get('.login-button').click()
+        cy.wait('@loginRequest')
         cy.url().should('include', 'dashboard')
         cy.get('.dashboard-header').should('contain', 'Dashboard')
     })
@@ -47,6 +48,7 @@ describe('Login Page Tests', () => {
         cy.get('[href="/shortenlink"]').click()
         cy.get('.shorten-link-input').type('www.example.com/CypressExample')
         cy.get('.shorten-link-button').click()
+        cy.wait('@shortenLinkRequest')
         cy.get('.shortened-link-input').should('have.value', 'tur.link/4a7c204baeacaf2c')
     })
     it('should submit a second original link and return a second shortened link', () => {
@@ -54,6 +56,7 @@ describe('Login Page Tests', () => {
         cy.get('[href="/shortenlink"]').click()
         cy.get('.shorten-link-input').type('www.example.com/CypressSecondExample')
         cy.get('.shorten-link-button').click()
+        cy.wait('@shortenSecondLinkRequest')
         cy.get('.shortened-link-input').should('have.value', 'tur.link/0970e271')
     })
     it('should be able to copy the shortened link', () => {
