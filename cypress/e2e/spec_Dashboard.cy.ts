@@ -6,7 +6,7 @@ describe('Dashboard Page Tests', () => {
             body: {
                 data: {
                     "username": "kim@example.com",
-                    "passsword": "kim123"
+                    "password": "kim123"
                 }
             }
         })
@@ -61,5 +61,4 @@ describe('Dashboard Page Tests', () => {
         cy.get('.click-count').last().should('contain', 0)
         cy.get('.tags').last().should('contain', 'Bootstrap')
     })
-
 })
