@@ -10,6 +10,14 @@ describe('Login Page Tests', () => {
                 }
             }
         })
+        cy.intercept('GET', 'https://turlink-be-53ba7254a7c1.herokuapp.com/api/v1/top_links', {
+            statusCode: 200,
+            fixture: 'topfivelinks'
+        })
+        cy.intercept('GET', 'https://turlink-be-53ba7254a7c1.herokuapp.com/api/v1/tags', {
+            statusCode: 200,
+            fixture: 'tags'
+        })
         cy.intercept("POST", "https://turlink-be-53ba7254a7c1.herokuapp.com/api/v1/users/undefined/links?link=www.example.com%2FCypressExample", {
             statusCode: 200,
             fixture: 'shortenlink.json'  
@@ -58,6 +66,7 @@ describe('Login Page Tests', () => {
             cy.stub(win.navigator.clipboard, 'writeText').as('copyToClipboard')
         })
         cy.get('.copy-button').click()
+        cy.get('.copy-message-body').should('contain', 'tur.link/0970e271 copied to clipboard!')
         cy.get('@copyToClipboard').should('have.been.calledWith', 'tur.link/0970e271')
     })
     it('should display an error when an original link is not entered', () => {
