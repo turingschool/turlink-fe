@@ -14,6 +14,10 @@ describe('Login Page Tests', () => {
             statusCode: 200,
             fixture: 'shortenlink.json'  
           })
+        cy.intercept("POST", "https://turlink-be-53ba7254a7c1.herokuapp.com/api/v1/users/undefined/links?link=www.example.com%2FCypressSecondExample", {
+            statusCode: 200,
+            fixture: 'shortenlink2.json'  
+          })
         cy.get('.email-input').type('kim@example.com')
         cy.get('.password-input').type('kim123')
         cy.get('.login-button').click()
@@ -36,5 +40,12 @@ describe('Login Page Tests', () => {
         cy.get('.shorten-link-input').type('www.example.com/CypressExample')
         cy.get('.shorten-link-button').click()
         cy.get('.shortened-link-input').should('have.value', 'tur.link/4a7c204baeacaf2c')
+    })
+    it('should submit a second original link and return a second shortened link', () => {
+        cy.get('.navbar')
+        cy.get('[href="/shortenlink"]').click()
+        cy.get('.shorten-link-input').type('www.example.com/CypressSecondExample')
+        cy.get('.shorten-link-button').click()
+        cy.get('.shortened-link-input').should('have.value', 'tur.link/0970e271')
     })
 })
