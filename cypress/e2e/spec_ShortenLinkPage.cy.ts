@@ -78,4 +78,23 @@ describe('Login Page Tests', () => {
         cy.wait('@422ErrorLinkRequest')
         cy.get('.error-message').should('contain', 'Error: Original can\'t be blank')
     })
+    it('should display an error when a user ID is not entered', () => {
+        cy.intercept('POST', 'https://turlink-be-53ba7254a7c1.herokuapp.com/api/v1/users/undefined/links?link=www.example.com%2FUserTest', {
+            statusCode: 404,
+            body: {
+                "errors": [
+                    {
+                        "status": "unprocessable_entity",
+                        "message": "User must exist"
+                    }
+                ]
+            }
+        }).as('404ErrorUserIdRequest')
+        cy.get('.navbar')
+        cy.get('[href="/shortenlink"]').click()
+        cy.get('.shorten-link-input').type('www.example.com/UserTest')
+        cy.get('.shorten-link-button').click()
+        cy.wait('@404ErrorUserIdRequest')
+        cy.get('.error-message').should('contain', 'User must exist')
+    })
 })
