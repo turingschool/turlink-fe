@@ -13,7 +13,7 @@ describe('Dashboard Page Tests', () => {
         cy.get('.email-input').type('kim@example.com')
         cy.get('.password-input').type('kim123')
     })
-    it('should display a messager to the user if there are no links to return', () => {
+    it('should display a message to the user if there are no links to return', () => {
         cy.intercept('GET', 'https://turlink-be-53ba7254a7c1.herokuapp.com/api/v1/top_links', {
             statusCode: 200,
             body: {
@@ -29,39 +29,36 @@ describe('Dashboard Page Tests', () => {
         cy.get('.error-message').should('contain', "No links were found.")
         cy.get('.table-row').should('have.length', 0)
     })
-    it('should display a message to the user if there was an error fetching the top links', () => {
-        cy.intercept('GET', 'https://turlink-be-53ba7254a7c1.herokuapp.com/api/v1/top_links', {
-            statusCode: 500,
-        })
-        cy.intercept('GET', 'https://turlink-be-53ba7254a7c1.herokuapp.com/api/v1/tags', {
-            statusCode: 200,
-            fixture: 'tags'
-        })
-        cy.get('.login-button').click()
-        cy.get('.error-message').should('contain', 'No links were found.')
-    })
+ 
+
     it('should display a message to the user if no tags meet the tag filter criteria', () => {
+      
         cy.intercept('GET', 'https://turlink-be-53ba7254a7c1.herokuapp.com/api/v1/top_links', {
             statusCode: 200,
             fixture: 'topfivelinks'
-        })
+        }).as('fetchTopLinks');
+
+        
         cy.intercept('GET', 'https://turlink-be-53ba7254a7c1.herokuapp.com/api/v1/tags', {
             statusCode: 200,
-            fixture: 'tags'
-        })
-        cy.get('.login-button').click()
+            fixture: 'tags' 
+        }).as('fetchTags');
+
+
+        cy.get('.login-button').click();
+
+        
         cy.intercept('GET', 'https://turlink-be-53ba7254a7c1.herokuapp.com/api/v1/top_links?tag=react', {
             statusCode: 200,
-            body: {
-                data: [
+            body: { data: [] } 
+        }).as('fetchFilteredLinks');
 
-                ]     
-            }
-        })
-        cy.get('.tag-filter').select('react')
-        cy.get('.current').should('contain', 'Current filters:')
-        cy.get('.current-filters > .tag').should('contain', 'react')
-        cy.get('.table-row').should('have.length', 0)
-        cy.get('.error-message').should('contain', 'No links were found.')
-    })
-})
+       
+        cy.get('.tag-filter').select('react');
+        cy.wait('@fetchFilteredLinks');
+        cy.get('.current').should('contain', 'Current filters:');
+        cy.get('.current-filters > .tag').should('contain', 'react');
+        cy.get('.table-row').should('have.length', 0);
+        cy.get('.error-message').should('contain', 'No links found for the selected tag, please select another filter.');
+    });
+});

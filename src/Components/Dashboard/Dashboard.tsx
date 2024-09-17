@@ -24,15 +24,23 @@ const Dashboard: React.FC = () => {
         fetchTopLinks(selectedTags.length > 0 ? selectedTags : undefined)
             .then((fetchedLinks) => {
                 if (fetchedLinks.length === 0) {
-                    setError("No links were found.");
+                    
+                    setError(selectedTags.length > 0 
+                        ? "No links found for the selected tag, please select another filter."
+                        : "No links were found."
+                    );
+                    setLinks([]); 
                 } else {
+                    
                     setLinks(fetchedLinks);
-                    setError("");
+                    setError(""); 
                 }
             })
-            .catch((error) => {
-                console.error(error);
-                setError("We encountered an unexpected error and were unable to load the links. Please try again later.");
+            .catch((err) => {
+            
+                console.error("Error fetching links:", err);
+                setError("We encountered an unexpected error and were unable to load the top 5 links. Please try again later.");
+                setLinks([]);
             });
     }, [selectedTags]);
 
@@ -79,10 +87,16 @@ const Dashboard: React.FC = () => {
                             <div className="header-item">Click Count</div>
                             <div className="header-item">Tags</div>
                         </div>
-                        {links.map((link, index) => (
+                        {links.length > 0 ? (
+                        links.map((link, index) => (
                             <div key={index} className="table-row">
                                 <div className="table-item link-name">
-                                    <a onClick={(event: React.MouseEvent<HTMLAnchorElement>) => handleClick(link.name, event)} href={link.name}>{link.name}</a>
+                                    <a 
+                                        onClick={(event: React.MouseEvent<HTMLAnchorElement>) => handleClick(link.name, event)} 
+                                        href={link.name}
+                                    >
+                                        {link.name}
+                                    </a>
                                 </div>
                                 <div className="table-item click-count">{link.clickCount}</div>
                                 <div className="table-item tags">
@@ -95,7 +109,10 @@ const Dashboard: React.FC = () => {
                                     )}
                                 </div>
                             </div>
-                        ))}
+                        ))
+                        ) : (
+                            <p className="no-links">No links found.</p>
+                        )}
                     </div>
                 )}
             </section>
