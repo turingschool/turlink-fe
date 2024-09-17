@@ -48,4 +48,16 @@ describe('Login Page Tests', () => {
         cy.get('.shorten-link-button').click()
         cy.get('.shortened-link-input').should('have.value', 'tur.link/0970e271')
     })
+    it('should be able to copy the shortened link', () => {
+        cy.get('.navbar')
+        cy.get('[href="/shortenlink"]').click()
+        cy.get('.shorten-link-input').type('www.example.com/CypressSecondExample')
+        cy.get('.shorten-link-button').click()
+        cy.get('.shortened-link-input').should('have.value', 'tur.link/0970e271')
+        cy.window().then((win) => {
+            cy.stub(win.navigator.clipboard, 'writeText').as('copyToClipboard')
+        })
+        cy.get('.copy-button').click()
+        cy.get('@copyToClipboard').should('have.been.calledWith', 'tur.link/0970e271')
+    })
 })
