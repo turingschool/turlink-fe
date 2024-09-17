@@ -60,4 +60,22 @@ describe('Login Page Tests', () => {
         cy.get('.copy-button').click()
         cy.get('@copyToClipboard').should('have.been.calledWith', 'tur.link/0970e271')
     })
+    it('should display an error when an original link is not entered', () => {
+        cy.intercept('POST', 'https://turlink-be-53ba7254a7c1.herokuapp.com/api/v1/users/undefined/links?link=', {
+            statusCode: 422,
+            body: {
+                "errors": [
+                    {
+                        "status": "unprocessable_entity",
+                        "message": "Original can't be blank"
+                    }
+                ]
+            }
+        }).as('422ErrorLinkRequest')
+        cy.get('.navbar')
+        cy.get('[href="/shortenlink"]').click()
+        cy.get('.shorten-link-button').click()
+        cy.wait('@422ErrorLinkRequest')
+        cy.get('.error-message').should('contain', 'Error: Original can\'t be blank')
+    })
 })
