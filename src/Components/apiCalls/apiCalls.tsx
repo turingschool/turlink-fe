@@ -50,9 +50,10 @@ export const fetchTags = async () => {
   }));
 };
 
-export function fetchTopLinks(tag?: string) {
-  const url = tag
-    ? `https://turlink-be-53ba7254a7c1.herokuapp.com/api/v1/top_links?tag=${tag}`
+export function fetchTopLinks(tags?: string[]) {
+  const tagParam = tags?.length ? tags.join(',') : '';
+  const url = tagParam
+    ? `https://turlink-be-53ba7254a7c1.herokuapp.com/api/v1/top_links?tag=${tagParam}`
     : "https://turlink-be-53ba7254a7c1.herokuapp.com/api/v1/top_links";
 
   return fetch(url)
@@ -63,19 +64,12 @@ export function fetchTopLinks(tag?: string) {
       return response.json();
     })
     .then((data) => {
-      // if (data.data.length === 0) {
-      //   throw new Error("No links found for the selected tag, please select another filter");
-      // }
       return data.data.map((link: any) => ({
         name: link.attributes.short,
         clickCount: link.attributes.click_count,
         tags: link.attributes.tags.map((tag: any) => tag.name),
       }));
     })
-    // .catch((error) => {
-    //   console.error("Error fetching top links:", error);
-    //   return [];
-    // });
 }
 
 export const getTags = async () => {

@@ -16,58 +16,57 @@ interface Tag {
 const Dashboard: React.FC = () => {
     const [links, setLinks] = useState<Link[]>([]);
     const [tags, setTags] = useState<Tag[]>([]);
-    const [selectedTag, setSelectedTag] = useState<string>("");
+    const [selectedTags, setSelectedTags] = useState<string[]>([]);
     const [error, setError] = useState<string>("");
+    const [selectedTagValue, setSelectedTagValue] = useState<string>("");
 
     useEffect(() => {
-        fetchTopLinks()
+        fetchTopLinks(selectedTags.length > 0 ? selectedTags : undefined)
             .then((fetchedLinks) => {
-                if (fetchedLinks.length === 0) {
-                    setError("No links were found.");
-                } else {
+                if (fetchedLinks.length === 0) {          
+                    setError(selectedTags.length > 0 
+                        ? "No links found for the selected tag(s), please select another filter."
+                        : "No links were found."
+                    );
+                    setLinks([]); 
+                } else {       
                     setLinks(fetchedLinks);
+                    // setError(""); 
                 }
             })
-            .catch((error) => {
-                console.error(error)
+            .catch((err) => {
+                console.error("Error fetching links:", err);
                 setError("We encountered an unexpected error and were unable to load the top 5 links. Please try again later.");
-            })
-    }, []);
+            });
+    }, [selectedTags]);
 
     useEffect(() => {
-        fetchTags().then((fetchedTags) => setTags(fetchedTags))
+        fetchTags().then((fetchedTags) => setTags(fetchedTags));
     }, []);
 
     const handleTagChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         const selectedTag = event.target.value;
-        setSelectedTag(selectedTag);
         setError("");
+        if (!selectedTags.includes(selectedTag) && selectedTag !== "") {
+            setSelectedTags([...selectedTags, selectedTag]);
+        }
+        setSelectedTagValue("");
+    };
 
-        fetchTopLinks(selectedTag)
-            .then((fetchedLinks) => {
-                if (fetchedLinks.length === 0) {
-                    setLinks([]);
-                    setError("No links found for the selected tag, please select another filter.");
-                } else {
-                    setLinks(fetchedLinks);
-                }
-            })
-            .catch((error) => {
-                setLinks([]);
-                setError("");
-                console.error(error)
-            });
+    const removeTag = (tagToRemove: string) => {
+        const updatedTags = selectedTags.filter(tag => tag !== tagToRemove);
+        setSelectedTags(updatedTags);
     };
 
     const handleClick = (shortenedLink: string, event: React.MouseEvent<HTMLAnchorElement>) => {
-        event.preventDefault()
+        event.preventDefault();
         incrementClickCountAndVisitUrl(shortenedLink)
             .then(data => {
-                const originalURL:string = data.data.attributes.original
-                window.open(originalURL)
-                window.location.reload()
-            })       
-    }
+                const originalURL: string = data.data.attributes.original;
+                window.open(originalURL);
+                window.location.reload();
+            });
+    };
 
     return (
         <div className="dashboard-container">
@@ -84,7 +83,8 @@ const Dashboard: React.FC = () => {
                             <div className="header-item">Click Count</div>
                             <div className="header-item">Tags</div>
                         </div>
-                        {links.map((link, index) => (
+                        {links.length > 0 ? (
+                        links.map((link, index) => (
                             <div key={index} className="table-row">
                                 <div className="table-item link-name">
                                     <div className="tooltip">
@@ -105,14 +105,18 @@ const Dashboard: React.FC = () => {
                                     )}
                                 </div>
                             </div>
-                        ))}
+                        ))
+                        ) : (
+                            <p className="no-links">No links found.</p>
+                        )}
                     </div>
                 )}
             </section>
 
             <section className="filter-by-tag">
                 <h2>Filter by Tag</h2>
-                <select className="tag-filter" value={selectedTag} onChange={handleTagChange}>
+                <select className="tag-filter" onChange={handleTagChange}
+                value={selectedTagValue}>
                     <option value="">Select a tag</option>
                     {tags.map((tag) => (
                         <option key={tag.id} value={tag.name}>
@@ -122,10 +126,14 @@ const Dashboard: React.FC = () => {
                 </select>
                 <div className="current-filters">
                     <p className="current">Current filters:</p>
-                    {selectedTag ? (
-                        <span className="tag">{selectedTag}</span>
+                    {selectedTags.length > 0 ? (
+                        selectedTags.map((tag, idx) => (
+                            <span key={idx} className="tag">
+                                {tag} <button onClick={() => removeTag(tag)}>x</button>
+                            </span>
+                        ))
                     ) : (
-                        <span className="no-filter">No filter applied yet, select one from the dropdown to see the top 5 links for that tag.</span>
+                        <span className="no-filter">No filter applied yet, select one from the dropdown to see the top links for that tag.</span>
                     )}
                 </div>
             </section>
@@ -133,4 +141,5 @@ const Dashboard: React.FC = () => {
     );
 };
 
-export default Dashboard;
+
+    export default Dashboard;

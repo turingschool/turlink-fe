@@ -41,7 +41,7 @@ describe('Login Page Tests', () => {
             body: {
                 data: {
                     "username": "kim@example.com",
-                    "passsword": "kim123"
+                    "password": "kim123"
                 }
             }
         })
@@ -124,7 +124,7 @@ describe('Login Page Tests', () => {
             body: {
                 data: {
                     "username": "kim@example.com",
-                    "passsword": "kim123"
+                    "password": "kim123"
                 }
             }
         })
