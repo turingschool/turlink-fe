@@ -49,7 +49,6 @@
     background-color: #70C1C7;
 }
 
-
 .tags {
     display: flex;
     flex-wrap: wrap;
@@ -91,7 +90,7 @@
    
   }
 
-  .delete-button {
+.delete-button {
     background-color: #f44336;
     border: none;
     padding: 10px 20px;

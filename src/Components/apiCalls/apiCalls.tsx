@@ -23,7 +23,6 @@ export const getShortLink = async (userId: string, linkInput: string) => {
 };
 
 export const fetchTags = async () => {
-
   const response = await fetch(
     "https://turlink-be-53ba7254a7c1.herokuapp.com/api/v1/tags",
     {
@@ -112,7 +111,6 @@ export const removeTagFromLink = async (linkId: string, tagId: string) => {
       }
     );
 
-
     if (!response.ok) {
       const errorText = await response.text();
       console.error(
@@ -121,7 +119,6 @@ export const removeTagFromLink = async (linkId: string, tagId: string) => {
       throw new Error(`Failed to remove tag: ${response.statusText}`);
     }
 
-
     const data = await response.json();
     return data;
   } catch (error) {
@@ -129,7 +126,6 @@ export const removeTagFromLink = async (linkId: string, tagId: string) => {
     throw error;
   }
 };
-
 
 export const getTagsForLink = async (linkId: string) => {
   const response = await fetch(
