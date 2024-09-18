@@ -63,13 +63,6 @@ describe('Dashboard Page Tests', () => {
         cy.get('.click-count').last().should('contain', 0)
         cy.get('.tags').last().should('contain', 'Bootstrap')
     })
-<<<<<<< HEAD
-<<<<<<< HEAD
-})
-=======
-
-=======
->>>>>>> 76ab415fb97bad326c035f05fb86b3b4b8bc80ac
     it('should handle multiple tag filtering', () => {
         cy.get('.tag-filter').select('javascript')
         cy.get('.tag-filter').select('ruby')
@@ -114,4 +107,3 @@ describe('Dashboard Page Tests', () => {
         cy.get('@windowOpen').should('be.calledWith', 'https://2019.wattenberger.com/blog/css-cascade')
     })
 })
->>>>>>> b315ca317fa2efdc5ffd8055ffc739a5b42c1ff1
