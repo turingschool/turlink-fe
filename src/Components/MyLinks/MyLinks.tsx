@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { getUserLinks, getTagsForLink, addTagToLink, removeTagFromLink } from '../apiCalls/apiCalls';
+import { getUserLinks, getTagsForLink, addTagToLink, removeTagFromLink, incrementClickCountAndVisitUrl } from '../apiCalls/apiCalls';
 import Tags from '../Tags/Tags';
 import './MyLinks.css';
 import { Link } from '../../utils/types';
@@ -17,7 +17,6 @@ const MyLinks: React.FC = () => {
       fetchUserLinks(userId);
     }
   }, [userId]);
-
 
   const fetchUserLinks = async (userId: string) => {
     try {
@@ -92,6 +91,16 @@ const MyLinks: React.FC = () => {
     }
   };
 
+  const handleClick = (shortenedLink: string, event: React.MouseEvent<HTMLAnchorElement>) => {
+    event.preventDefault();
+    incrementClickCountAndVisitUrl(shortenedLink)
+      .then(data => {
+        const originalURL: string = data.data.attributes.original
+        window.open(originalURL)
+        window.location.reload()
+      });
+  };
+
   return (
     <div className="my-links-container">
       <h2>My Links</h2>
@@ -101,9 +110,9 @@ const MyLinks: React.FC = () => {
       ) : (
         links.map((link) => (
           <div key={link.id} className="link-item">
-            <p>Original: {link.original}</p>
-            <p>
-              Short: <a href={link.short} target="_blank" rel="noopener noreferrer">{link.short}</a>
+            <p>Original URL: {link.original}</p>
+            <p>Short URL: <a onClick={(event: React.MouseEvent<HTMLAnchorElement>) => handleClick(link.short, event)} href={link.short}>{link.short}</a>
+              {/* Short URL: <a href={link.short} target="_blank" rel="noopener noreferrer">{link.short}</a> */}
             </p>
             <div className="tags">
               {link.tags && link.tags.length > 0 ? (
@@ -120,7 +129,7 @@ const MyLinks: React.FC = () => {
           </div>
         ))
       )}
-  
+
       {isPopupOpen && selectedLink && (
         <Tags
           linkId={selectedLink.id.toString()}
