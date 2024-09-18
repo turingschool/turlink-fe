@@ -4,7 +4,7 @@
       "id": "1",
       "type": "link",
       "attributes": {
-        "original": "original-long-link-test.com",
+        "original": "https://2019.wattenberger.com/blog/css-cascade",
         "short": "tur.link/dc79d5e0",
         "user_id": 1,
         "tags": [
@@ -197,7 +197,7 @@
       "id": "5",
       "type": "link",
       "attributes": {
-        "original": "testlink.com",
+        "original": "https://cheatography.com/aiqbal/cheat-sheets/cypress-io/",
         "short": "tur.link/dfaf67ed",
         "user_id": 1,
         "tags": [],
