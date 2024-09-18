@@ -160,7 +160,7 @@ footer {
     text-align: center;
     padding: 5px 0;
     border-radius: 4px;
-    border: 1px solid #82E1E6; 
+    border: 1px solid #2BC2D1; 
     position: absolute;
     z-index: 1;
     top: -5px;
@@ -180,7 +180,7 @@ footer {
     margin-top: -7px;
     border-width: 7px 26px;
     border-style: solid;
-    border-color: transparent #82E1E6 transparent transparent; 
+    border-color: transparent #2BC2D1 transparent transparent; 
   }
 
   .tooltip .tooltiptext::after {
@@ -193,4 +193,10 @@ footer {
     border-width: 5px 24px; 
     border-style: solid;
     border-color: transparent white transparent transparent; 
+}
+
+#tooltip-instructions {
+    font-size: 0.9em; 
+    font-weight: normal;
+    color: #2BC2D1;
 }

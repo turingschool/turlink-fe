@@ -80,7 +80,7 @@ const Dashboard: React.FC = () => {
                 {!error && (
                     <div className="links-table">
                         <div className="table-header">
-                            <div className="header-item"></div>
+                            <div className="header-item" id='tooltip-instructions'>✨ Hover over links for a summary of content</div>
                             <div className="header-item">Click Count</div>
                             <div className="header-item">Tags</div>
                         </div>
@@ -90,7 +90,7 @@ const Dashboard: React.FC = () => {
                                     <div className="tooltip">
                                         <a onClick={(event: React.MouseEvent<HTMLAnchorElement>) => handleClick(link.name, event)} href={link.name}>{link.name}</a>
                                         <span className="tooltiptext">
-                                        More info about this link
+                                        ✨ More info about this link
                                     </span>    
                                     </div>
                                 </div>
