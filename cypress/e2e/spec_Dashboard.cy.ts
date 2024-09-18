@@ -75,7 +75,7 @@ describe('Dashboard Page Tests', () => {
         cy.get('.current-filters > .tag > button').click() 
         cy.get('.table-row').should('have.length', 5) 
     })
-    it.only('should increment the click count and open the URL in a new browser window when a short URL is clicked', () => {
+    it('should increment the click count and open the URL in a new browser window when a short URL is clicked', () => {
         cy.intercept('GET', 'https://turlink-be-53ba7254a7c1.herokuapp.com/api/v1/links?short=tur.link/dc79d5e0', {
             statusCode: 200,
             body: {
