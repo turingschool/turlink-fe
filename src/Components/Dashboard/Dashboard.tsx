@@ -23,15 +23,14 @@ const Dashboard: React.FC = () => {
     useEffect(() => {
         fetchTopLinks(selectedTags.length > 0 ? selectedTags : undefined)
             .then((fetchedLinks) => {
-                if (fetchedLinks.length === 0) {          
-                    setError(selectedTags.length > 0 
+                if (fetchedLinks.length === 0) {
+                    setError(selectedTags.length > 0
                         ? "No links found for the selected tag(s), please select another filter."
                         : "No links were found."
                     );
-                    setLinks([]); 
-                } else {       
+                    setLinks([]);
+                } else {
                     setLinks(fetchedLinks);
-                    // setError(""); 
                 }
             })
             .catch((err) => {
@@ -62,7 +61,7 @@ const Dashboard: React.FC = () => {
         event.preventDefault();
         incrementClickCountAndVisitUrl(shortenedLink)
             .then(data => {
-                const originalURL: string = data.data.attributes.original;
+                const originalURL: string = data.data.attributes.original
                 window.open(originalURL);
                 window.location.reload();
             });
@@ -84,28 +83,23 @@ const Dashboard: React.FC = () => {
                             <div className="header-item">Tags</div>
                         </div>
                         {links.length > 0 ? (
-                        links.map((link, index) => (
-                            <div key={index} className="table-row">
-                                <div className="table-item link-name">
-                                    <a 
-                                        onClick={(event: React.MouseEvent<HTMLAnchorElement>) => handleClick(link.name, event)} 
-                                        href={link.name}
-                                    >
-                                        {link.name}
-                                    </a>
+                            links.map((link, index) => (
+                                <div key={index} className="table-row">
+                                    <div className="table-item link-name">
+                                        <a onClick={(event: React.MouseEvent<HTMLAnchorElement>) => handleClick(link.name, event)} href={link.name}>{link.name}</a>
+                                    </div>
+                                    <div className="table-item click-count">{link.clickCount}</div>
+                                    <div className="table-item tags">
+                                        {link.tags.length > 0 ? (
+                                            link.tags.map((tag, idx) => (
+                                                <span key={idx} className="tag">{tag}</span>
+                                            ))
+                                        ) : (
+                                            <span className="no-tag">No tags assigned for this link</span>
+                                        )}
+                                    </div>
                                 </div>
-                                <div className="table-item click-count">{link.clickCount}</div>
-                                <div className="table-item tags">
-                                    {link.tags.length > 0 ? (
-                                        link.tags.map((tag, idx) => (
-                                            <span key={idx} className="tag">{tag}</span>
-                                        ))
-                                    ) : (
-                                        <span className="no-tag">No tags assigned for this link</span>
-                                    )}
-                                </div>
-                            </div>
-                        ))
+                            ))
                         ) : (
                             <p className="no-links">No links found.</p>
                         )}
@@ -116,7 +110,7 @@ const Dashboard: React.FC = () => {
             <section className="filter-by-tag">
                 <h2>Filter by Tag</h2>
                 <select className="tag-filter" onChange={handleTagChange}
-                value={selectedTagValue}>
+                    value={selectedTagValue}>
                     <option value="">Select a tag</option>
                     {tags.map((tag) => (
                         <option key={tag.id} value={tag.name}>
@@ -141,5 +135,4 @@ const Dashboard: React.FC = () => {
     );
 };
 
-
-    export default Dashboard;
+export default Dashboard;
