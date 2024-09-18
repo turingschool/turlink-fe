@@ -23,24 +23,20 @@ const Dashboard: React.FC = () => {
     useEffect(() => {
         fetchTopLinks(selectedTags.length > 0 ? selectedTags : undefined)
             .then((fetchedLinks) => {
-                if (fetchedLinks.length === 0) {
-                    
+                if (fetchedLinks.length === 0) {          
                     setError(selectedTags.length > 0 
-                        ? "No links found for the selected tag, please select another filter."
+                        ? "No links found for the selected tag(s), please select another filter."
                         : "No links were found."
                     );
                     setLinks([]); 
-                } else {
-                    
+                } else {       
                     setLinks(fetchedLinks);
-                    setError(""); 
+                    // setError(""); 
                 }
             })
             .catch((err) => {
-            
                 console.error("Error fetching links:", err);
                 setError("We encountered an unexpected error and were unable to load the top 5 links. Please try again later.");
-                setLinks([]);
             });
     }, [selectedTags]);
 
