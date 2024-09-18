@@ -87,7 +87,12 @@ const Dashboard: React.FC = () => {
                         {links.map((link, index) => (
                             <div key={index} className="table-row">
                                 <div className="table-item link-name">
-                                    <a onClick={(event: React.MouseEvent<HTMLAnchorElement>) => handleClick(link.name, event)} href={link.name}>{link.name}</a>
+                                    <div className="tooltip">
+                                        <a onClick={(event: React.MouseEvent<HTMLAnchorElement>) => handleClick(link.name, event)} href={link.name}>{link.name}</a>
+                                        <span className="tooltiptext">
+                                        More info about this link
+                                    </span>    
+                                    </div>
                                 </div>
                                 <div className="table-item click-count">{link.clickCount}</div>
                                 <div className="table-item tags">
