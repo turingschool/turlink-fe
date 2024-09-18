@@ -163,7 +163,7 @@ footer {
     border: 1px solid #2BC2D1; 
     position: absolute;
     z-index: 1;
-    top: -5px;
+    top: -0.5em;
     left: 125%;
     transform: translateY(-20%);
   }
