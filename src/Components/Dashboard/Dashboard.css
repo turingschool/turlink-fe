@@ -127,7 +127,7 @@ footer {
     border-radius: 12px;
     padding: 5px 10px;
     font-size: 0.9em;
-    color: #333;
+    color: #3C4040;
     margin-right: 1em;
     margin-bottom: 1em; 
 }
@@ -143,4 +143,60 @@ footer {
 
 .current {
     text-decoration: underline;
+}
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: white;
+    color: #3C4040;
+    font-family: Arial, sans-serif; 
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 4px;
+    border: 1px solid #2BC2D1; 
+    position: absolute;
+    z-index: 1;
+    top: -0.5em;
+    left: 125%;
+    transform: translateY(-20%);
+  }
+
+  .tooltip:hover .tooltiptext {
+    visibility: visible;
+  }
+
+  .tooltip .tooltiptext::before {
+    content: " ";
+    position: absolute;
+    top: 50%;
+    right: 100%; 
+    margin-top: -7px;
+    border-width: 7px 26px;
+    border-style: solid;
+    border-color: transparent #2BC2D1 transparent transparent; 
+  }
+
+  .tooltip .tooltiptext::after {
+    content: " ";
+    position: absolute;
+    top: 50%;
+    right: 98%;
+    margin-top: -5px; 
+    margin-right: 2px; 
+    border-width: 5px 24px; 
+    border-style: solid;
+    border-color: transparent white transparent transparent; 
+}
+
+#tooltip-instructions {
+    font-size: 0.9em; 
+    font-weight: normal;
+    color: #2BC2D1;
 }
