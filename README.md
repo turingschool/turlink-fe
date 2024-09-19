@@ -30,8 +30,6 @@ TurLink is a React application that shortens links provided by users.
 
 - Fetch API
 
-## Deployed Link
-
 ## Installation Instructions
 
 To run this project locally, follow these steps: 
@@ -55,8 +53,6 @@ To run this project locally, follow these steps: 
 
 - This was our first project working with a team of backend developers
 
-- Working with mock data with the API was being built by out backend development team
-
 - Ensuring responsiveness across all devices at various breakpoints throughout the application
 
 - Working with mock data as the API was asynchronously being built 
@@ -71,14 +67,19 @@ To run this project locally, follow these steps: 
 
 - Developing an application that solves a real-world problem for Turing students, instructors, and alumni. 
 
-- Collaboration: it was fun to create an application as a fullstack team. 
-
-## Screenshots 
-
+- Collaboration: it was fun to create an application as a fullstack team.
 
 ## Disclaimer
 
 - IMPORTANT NOTE to future developers: Not every link in the My Links or Dashboard page has a functioning route for the URL as of publication on 9/19/2024
+
+## Screenshots 
+![Landing Page](https://github.com/user-attachments/assets/1024fb44-7212-4c2c-9ecf-198f4076265f)
+![Login](https://github.com/user-attachments/assets/0b2d172c-b017-486c-8a8e-cc25f5fa79d4)
+![Shorten Link Page](https://github.com/user-attachments/assets/691d812e-5ef0-41f2-9823-0e5a869a6e02)
+![Dashboard Page with static Tooltip bubble](https://github.com/user-attachments/assets/4b8b48e5-7544-418e-b82d-de1662d6ddf4)
+![My Links Page](https://github.com/user-attachments/assets/27f26ffc-025c-4592-9135-8eda89299c94)
+
 
 ## Contributors
 - David Swatzell 
