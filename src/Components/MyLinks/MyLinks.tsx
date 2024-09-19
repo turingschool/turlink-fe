@@ -106,14 +106,12 @@ const MyLinks: React.FC = () => {
       <h2>My Links</h2>
       {errorMessage && <p className="error-message">{errorMessage}</p>}
       {links.length === 0 ? (
-        <p>No links available.</p>
+        <p className="my-links-loading">Thanks for your patience! We're loading your links page now.</p>
       ) : (
         links.map((link) => (
           <div key={link.id} className="link-item">
             <p>Original URL: {link.original}</p>
-            <p>Short URL: <a onClick={(event: React.MouseEvent<HTMLAnchorElement>) => handleClick(link.short, event)} href={link.short}>{link.short}</a>
-              {/* Short URL: <a href={link.short} target="_blank" rel="noopener noreferrer">{link.short}</a> */}
-            </p>
+            <p>Short URL: <a onClick={(event: React.MouseEvent<HTMLAnchorElement>) => handleClick(link.short, event)} href={link.short}>{link.short}</a></p>
             <div className="tags">
               {link.tags && link.tags.length > 0 ? (
                 link.tags.map((tag) => (
@@ -125,7 +123,7 @@ const MyLinks: React.FC = () => {
                 <span className="no-tags">No tags</span>
               )}
             </div>
-            <button onClick={() => openTagsPopup(link)}>Manage Tags</button>
+            <button className="manage-tags-button" onClick={() => openTagsPopup(link)}>Manage Tags</button>
           </div>
         ))
       )}

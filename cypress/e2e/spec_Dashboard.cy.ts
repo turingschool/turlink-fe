@@ -102,7 +102,7 @@ describe('Dashboard Page Tests', () => {
         })
         cy.get('.link-name').first().should('contain', 'tur.link/dc79d5e0')
         cy.get('.click-count').first().should('contain', 0)
-        cy.get(':nth-child(2) > .link-name > a').click()
+        cy.get(':nth-child(2) > .link-name > .tooltip > a').click()
         cy.get(':nth-child(2) > .click-count').should('contain', 1)
         cy.get('@windowOpen').should('be.calledWith', 'https://2019.wattenberger.com/blog/css-cascade')
     })

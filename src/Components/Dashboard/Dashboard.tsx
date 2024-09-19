@@ -34,11 +34,11 @@ const Dashboard: React.FC = () => {
                     setLinks(fetchedLinks);
                 }
             })
+            .then(() => setIsLoading(false))
             .catch((err) => {
                 console.error("Error fetching links:", err);
                 setError("We encountered an unexpected error and were unable to load the top 5 links. Please try again later.");
-            });
-            setIsLoading(false)
+            });           
     }, [selectedTags]);
 
     useEffect(() => {
@@ -75,8 +75,8 @@ const Dashboard: React.FC = () => {
                 <h1>Dashboard</h1>
             </section>
             <section className="popular-links">
-                <h2>Popular Links</h2>
                 {isLoading && <p className="loading">The Top 5 Links are Loading.</p>}
+                <h2>Popular Links</h2>
                 {error && <p className="error-message">{error}</p>}
                 {!error && (
                     <div className="links-table">
