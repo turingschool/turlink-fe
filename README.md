@@ -47,6 +47,10 @@ To run this project locally, follow these steps: 
   - Click E2E testing
   - Click Start E2E Testing and select Chrome 
 
+## Deployed Link:
+
+- [Heroku Deployment](https://turlink-fe-da6763e5d8d6.herokuapp.com/)
+
 ## Challenges
 
 - This was our first project working with a team of backend developers
@@ -54,6 +58,8 @@ To run this project locally, follow these steps: 
 - Working with mock data with the API was being built by out backend development team
 
 - Ensuring responsiveness across all devices at various breakpoints throughout the application
+
+- Working with mock data as the API was asynchronously being built 
 
 ## Wins 
 
@@ -69,6 +75,10 @@ To run this project locally, follow these steps: 
 
 ## Screenshots 
 
+
+## Disclaimer
+
+- IMPORTANT NOTE to future developers: Not every link in the My Links or Dashboard page has a functioning route for the URL as of publication on 9/19/2024
 
 ## Contributors
 - David Swatzell 
